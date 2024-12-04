@@ -9,11 +9,12 @@ export type ExternalLinkProps = {
 };
 
 export interface Transaction {
-  id: string;
+  id?: string;
   merchant: string;
+  description: string | null;
   amount: number;
   date: string;
-  description: string;
+  type: 'income' | 'expense';
 }
 
 export interface TransactionsState {

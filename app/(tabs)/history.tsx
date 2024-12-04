@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View, Text, SafeAreaView } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTransactions } from '../../redux/actions/transactions';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
+import { fetchTransactions } from '@/redux/transactionsSlice';
 import { ThemedText } from '../../components/shared/ThemedText';
-import { RootState } from '../../redux/store';
 
 export default function HistoryScreen() {
-  const dispatch = useDispatch();
-  const transactions = useSelector((state: RootState) => state.transactions);
+  const dispatch = useAppDispatch(); // Use useAppDispatch instead of useDispatch
+  const transactions = useAppSelector(state => state.transactions.transactions);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Dispatch action to fetch transactions
-    dispatch(fetchTransactions());
-    setLoading(false);
+    // Use dispatch directly with fetchTransactions()
+    dispatch(fetchTransactions()).then(() => {
+      setLoading(false);
+    }).catch(() => {
+      setLoading(false);
+    });
   }, [dispatch]);
 
   return (
@@ -30,12 +32,12 @@ export default function HistoryScreen() {
           transactions.slice(0, 10).map((transaction) => (
             <View key={transaction.id} className='border-b-[0.5px] border-budget-silver w-full py-4 flex flex-row justify-between items-center'>
               <View className='flex flex-col justify-between items-start'>
-                <Text className='text-budget-midnight font-bold text-md'>{transaction.merchant}</Text>
+                <Text className='text-budget-snow font-bold text-md'>{transaction.merchant}</Text>
                 <Text className='text-budget-tangerine font-semibold text-sm'>{transaction.description}</Text>
-                <Text className='text-budget-midnight text-sm'>{transaction.date}</Text>
+                <Text className='text-budget-snow text-sm'>{transaction.date}</Text>
               </View>
-              <Text className='text-budget-charcoal font-bold text-xl'>
-                {transaction.amount}
+              <Text className='text-budget-snow font-bold text-xl'>
+                ${transaction.amount}
               </Text>
             </View>
           ))
