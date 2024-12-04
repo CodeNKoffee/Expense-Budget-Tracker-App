@@ -37,7 +37,7 @@ export default function HistoryScreen() {
             <View key={transaction.id} className='border-b-[0.5px] border-budget-silver w-full py-4 flex flex-row justify-between items-center'>
               <View className='flex flex-col justify-between items-start'>
                 <Text className='text-budget-snow font-bold text-md'>{transaction.merchant}</Text>
-                <Text className='text-budget-tangerine font-semibold text-sm'>{transaction.description}</Text>
+                <Text className='text-budget-tangerine font-semibold text-sm'>{transaction.category}</Text>
                 <Text className='text-budget-snow text-sm'>{transaction.date}</Text>
               </View>
               <Text className='text-budget-snow font-bold text-xl'>

@@ -7,7 +7,7 @@ export type ExternalLinkProps = {
 export interface Transaction {
   id?: string;
   merchant: string;
-  description: string | null;
+  category: string | null;
   amount: number;
   date: string;
   type: 'income' | 'expense';

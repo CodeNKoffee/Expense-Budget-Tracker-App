@@ -19,13 +19,13 @@ export const calculateTotalIncome = (transactions: Transaction[]): number => {
     .reduce((total, transaction) => total + transaction.amount, 0);
 };
 
-export const getDescriptionsByType = (transactions: Transaction[]) => {
+export const getcategorysByType = (transactions: Transaction[]) => {
   return transactions
-    .filter(t => t.type === 'expense' && t.description)
-    .reduce((descriptions, transaction) => {
-      const desc = transaction.description || 'Uncategorized';
-      descriptions[desc] = 
-        (descriptions[desc] || 0) + transaction.amount;
-      return descriptions;
+    .filter(t => t.type === 'expense' && t.category)
+    .reduce((categorys, transaction) => {
+      const desc = transaction.category || 'Uncategorized';
+      categorys[desc] =
+        (categorys[desc] || 0) + transaction.amount;
+      return categorys;
     }, {} as Record<string, number>);
 };

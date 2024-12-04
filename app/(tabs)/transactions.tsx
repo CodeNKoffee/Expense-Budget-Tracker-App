@@ -9,7 +9,7 @@ export default function TransactionsScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-budget-charcoal">
-      <ScrollView>
+      <ScrollView className='px-8 py-4'>
         <View className='mb-8 items-center'>
           <ThemedText style={styles.sectionHeader}>{t('transactions.addTransaction')}</ThemedText>
         </View>
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#FFF',
     fontWeight: 'bold',
-    marginBottom: 16,
     paddingTop: 16,
   },
 });

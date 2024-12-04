@@ -1,136 +1,188 @@
 import React, { useState } from 'react';
-import { 
-  View, 
-  TextInput, 
-  StyleSheet, 
-  TouchableOpacity, 
-  Text 
-} from 'react-native';
-import { addTransaction } from '@/redux/transactionsSlice';
+import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView } from 'react-native';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
-import { Transaction } from '../types';
+import { addTransaction } from '@/redux/transactionsSlice';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  weekday: 'short',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: true,
+}).format;
+
+const validationSchema = Yup.object({
+  merchant: Yup.string().required('Merchant is required'),
+  category: Yup.string().required('Category is required'),
+  amount: Yup.number()
+    .typeError('Amount must be a number')
+    .positive('Amount must be positive')
+    .required('Amount is required'),
+  type: Yup.string().oneOf(['income', 'expense']).required('Transaction type is required'),
+  date: Yup.string().test(
+    'is-valid-date',
+    'Invalid date format. Use format: Tue, 3 Dec • 3:30 PM',
+    (value) =>
+      !value || 
+      /^([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) • (\d{1,2}):(\d{2}) (AM|PM)$/.test(value)
+  ),
+});
 
 export default function TransactionForm() {
   const dispatch = useAppDispatch();
-  const [merchant, setMerchant] = useState('');
-  const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
-  const [type, setType] = useState<'income' | 'expense'>('expense');
 
-  const handleSubmit = () => {
-    // Basic validation
-    if (!merchant || !amount || !description) {
-      alert('Please fill all fields');
-      return;
-    }
+  const [transactionType, setTransactionType] = useState<'income' | 'expense'>('expense');
+  const [useCurrentTime, setUseCurrentTime] = useState(false);
 
-    const newTransaction: Transaction = {
-      merchant,
-      description,
-      amount: parseFloat(amount),
-      date: new Date().toLocaleString('en-US', {
-        weekday: 'short', 
-        month: 'short', 
-        day: 'numeric', 
-        hour: 'numeric', 
-        minute: '2-digit', 
-        hour12: true
-      }),
-      type,
+  const handleSubmit = (values: {
+    merchant: string;
+    category: string;
+    amount: string;
+    type: 'income' | 'expense';
+    date: string;
+  }) => {
+    const transactionDate = useCurrentTime
+      ? values.date
+      : dateFormat(new Date());
+
+    const newTransaction = {
+      ...values,
+      amount: parseFloat(values.amount),
+      type: transactionType,
+      date: transactionDate,
     };
 
     dispatch(addTransaction(newTransaction));
-    
-    // Reset form
-    setMerchant('');
-    setDescription('');
-    setAmount('');
-    setType('expense');
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Merchant"
-        value={merchant}
-        onChangeText={setMerchant}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Description"
-        value={description}
-        onChangeText={setDescription}
-        style={styles.input}
-      />
-      <TextInput
-        placeholder="Amount"
-        value={amount}
-        onChangeText={setAmount}
-        keyboardType="numeric"
-        style={styles.input}
-      />
-      <View style={styles.typeContainer}>
-        <TouchableOpacity 
-          style={[
-            styles.typeButton, 
-            type === 'expense' && styles.selectedType
-          ]}
-          onPress={() => setType('expense')}
-        >
-          <Text>Expense</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.typeButton, 
-            type === 'income' && styles.selectedType
-          ]}
-          onPress={() => setType('income')}
-        >
-          <Text>Income</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity 
-        style={styles.submitButton} 
-        onPress={handleSubmit}
-      >
-        <Text style={styles.submitText}>Add Transaction</Text>
-      </TouchableOpacity>
-    </View>
+    <Formik
+      initialValues={{
+        merchant: '',
+        category: '',
+        amount: '',
+        date: '',
+        type: 'expense',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+        <ScrollView className="p-5">
+          {/* Merchant Field */}
+          <View className="mb-4">
+            <Text className="text-lg font-bold mb-2 text-budget-snow">Merchant</Text>
+            <TextInput
+              onChangeText={handleChange('merchant')}
+              onBlur={handleBlur('merchant')}
+              value={values.merchant}
+              className={`bg-white border-4 border-budget-tangerine mb-4 p-3 rounded-2xl ${
+                errors.merchant && touched.merchant ? 'border-red-500' : ''
+              }`}
+            />
+            {errors.merchant && touched.merchant && (
+              <Text className="text-red-500 text-sm">{errors.merchant}</Text>
+            )}
+          </View>
+
+          {/* Category Field */}
+          <View className="mb-4">
+            <Text className="text-lg font-bold mb-2 text-budget-snow">Category</Text>
+            <TextInput
+              onChangeText={handleChange('category')}
+              onBlur={handleBlur('category')}
+              value={values.category}
+              className={`bg-white border-4 border-budget-tangerine mb-4 p-3 rounded-2xl ${
+                errors.category && touched.category ? 'border-red-500' : ''
+              }`}
+            />
+            {errors.category && touched.category && (
+              <Text className="text-red-500 text-sm">{errors.category}</Text>
+            )}
+          </View>
+
+          {/* Amount Field */}
+          <View className="mb-4">
+            <Text className="text-lg font-bold mb-2 text-budget-snow">Amount</Text>
+            <TextInput
+              onChangeText={handleChange('amount')}
+              onBlur={handleBlur('amount')}
+              value={values.amount}
+              keyboardType="numeric"
+              className={`bg-white border-4 border-budget-tangerine mb-4 p-3 rounded-2xl ${
+                errors.amount && touched.amount ? 'border-red-500' : ''
+              }`}
+            />
+            {errors.amount && touched.amount && (
+              <Text className="text-red-500 text-sm">{errors.amount}</Text>
+            )}
+          </View>
+
+          {/* Transaction Type - Toggle Switch */}
+          <View className="mb-4">
+            <Text className="text-lg font-bold mb-2 text-budget-snow">Transaction Type</Text>
+            <View className="flex flex-row items-center justify-between">
+              <Text className="text-white text-sm">Expense</Text>
+              <Switch
+                value={transactionType === 'income'}
+                onValueChange={(value) =>
+                  setTransactionType(value ? 'income' : 'expense')
+                }
+                trackColor={{
+                  false: '#ACACAC',
+                  true: '#2A2A2A',
+                }}
+                thumbColor={transactionType === 'income' ? '#FF9500' : '#FF9500'}
+              />
+              <Text className="text-white text-sm">Income</Text>
+            </View>
+          </View>
+
+          {/* Time Entry - Toggle Switch */}
+          <View className="mb-4">
+            <Text className="text-lg font-bold mb-2 text-budget-snow">Transaction Time</Text>
+            <View className="flex flex-row items-center justify-between">
+              <Text className="text-white text-sm">Use Current Time</Text>
+              <Switch
+                value={useCurrentTime} // No change here
+                onValueChange={(value) => setUseCurrentTime(value)} // No change here
+                trackColor={{
+                  false: '#ACACAC',
+                  true: '#2A2A2A',
+                }}
+                thumbColor={transactionType === 'income' ? '#FF9500' : '#FF9500'}
+              />
+              <Text className="text-white text-sm">Manually Enter Time</Text>
+            </View>
+            {useCurrentTime && ( // <-- Changed this condition
+              <TextInput
+                onChangeText={handleChange('date')}
+                onBlur={handleBlur('date')}
+                value={values.date}
+                placeholder="Enter date and time"
+                placeholderTextColor="#ACACAC"
+                className={`bg-white border-4 border-budget-tangerine mt-2 mb-4 p-3 rounded-2xl ${
+                  errors.date && touched.date ? 'border-red-500' : ''
+                }`}
+              />
+            )}
+            {errors.date && touched.date && (
+              <Text className="text-red-500 text-sm">{errors.date}</Text>
+            )}
+          </View>
+
+          {/* Submit Button */}
+          <TouchableOpacity
+            className="bg-budget-tangerine mt-4 py-4 rounded-2xl"
+            onPress={handleSubmit as () => void}
+          >
+            <Text className="text-white text-center font-bold text-xl">Add Transaction</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      )}
+    </Formik>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 5,
-  },
-  typeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 10,
-  },
-  typeButton: {
-    padding: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-  },
-  selectedType: {
-    backgroundColor: '#e0e0e0',
-  },
-  submitButton: {
-    backgroundColor: '#007bff',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  submitText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-});
