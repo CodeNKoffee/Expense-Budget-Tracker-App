@@ -1,9 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Dimensions, StyleSheet, SafeAreaView, Text } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { Colors } from '@/constants/Colors';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { getGreeting } from '@/utils';
 
 // Dummy transaction data
