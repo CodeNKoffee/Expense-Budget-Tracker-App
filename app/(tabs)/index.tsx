@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Dimensions, StyleSheet, SafeAreaView } from 'react-native';
+import { ScrollView, View, Dimensions, StyleSheet, SafeAreaView, Text } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { Colors } from '@/constants/Colors';
 import { ThemedText } from '@/components/ThemedText';
@@ -8,11 +8,11 @@ import { getGreeting } from '@/utils';
 
 // Dummy transaction data
 const recentTransactions = [
-  { id: 1, date: '2024-11-20', amount: '$200', description: 'Groceries' },
-  { id: 2, date: '2024-11-19', amount: '$50', description: 'Transportation' },
-  { id: 3, date: '2024-11-18', amount: '$150', description: 'Entertainment' },
-  { id: 4, date: '2024-11-17', amount: '$300', description: 'Rent' },
-  { id: 5, date: '2024-11-16', amount: '$20', description: 'Coffee' },
+  { id: 1, merchant: 'Oscar Stores', date: 'Tue, 25 May • 4:40 PM', amount: '$200', description: 'Groceries' },
+  { id: 2, merchant: 'Bolt', date: 'Mon, 18 May • 12:10 PM', amount: '$50', description: 'Transportation' },
+  { id: 3, merchant: 'Shahid', date: 'Wed, 12 May • 2:49 AM', amount: '$150', description: 'Entertainment' },
+  { id: 4, merchant: 'AirBnB', date: 'Sun, 5 January • 1:19 AM', amount: '$300', description: 'Rent' },
+  { id: 5, merchant: 'Resltess Coffeehouse', date: 'Sat, 4 January • 3:40 PM', amount: '$20', description: 'Coffee' },
   // Add more transactions as needed
 ];
 
@@ -80,14 +80,19 @@ export default function HomeScreen() {
         </View>
 
         {/* Recent Transactions List */}
-        <View style={[styles.chartContainer, { backgroundColor: '#FEFEFE' }]}>
-          <ThemedText style={styles.chartTitle}>Recent Transactions</ThemedText>
+        <View className='rounded-3xl bg-budget-snow px-6 py-4' style={styles.chartContainer}>
+          <Text className='text-lg font-bold text-budget-silver '>Recent Transactions</Text>
           <ScrollView>
             {recentTransactions.slice(0, 10).map((transaction) => (
-              <View key={transaction.id} style={styles.transactionItem}>
-                <ThemedText>{transaction.date}</ThemedText>
-                <ThemedText>{transaction.description}</ThemedText>
-                <ThemedText>{transaction.amount}</ThemedText>
+              <View key={transaction.id} className='border-b-[0.5px] border-budget-silver w-full py-4 flex flex-row justify-between items-center'>
+                <View className='flex lex-col justify-between items-start'>
+                  <Text className='text-budget-midnight font-bold text-md'>{transaction.merchant}</Text>
+                  <Text className='text-budget-tangerine font-semibold text-sm'>{transaction.description}</Text>
+                  <Text className='text-budget-midnight text-sm'>{transaction.date}</Text>
+                </View>
+                <Text className='text-budget-charcoal font-bold text-xl'>
+                  {transaction.amount}
+                </Text>
               </View>
             ))}
           </ScrollView>
