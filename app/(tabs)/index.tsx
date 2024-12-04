@@ -30,7 +30,7 @@ export default function HomeScreen() {
       <ScrollView className='px-8 py-4 flex flex-col'>
         {/* Header */}
         <View className='mb-12 items-center'>
-          <ThemedText style={styles.greeting}>{getGreeting().message}, Hatem</ThemedText>
+          <ThemedText style={styles.greeting}>{getGreeting().message}, Hatem 💸</ThemedText>
         </View>
 
         {/* Financial Stats */}
