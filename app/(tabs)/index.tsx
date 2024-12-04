@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Dimensions, StyleSheet, SafeAreaView, Text } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { ThemedText } from '@/components/ThemedText';
+import { ThemedText } from '@/components/shared/ThemedText';
 import { getGreeting } from '@/utils';
 import RecentTransactions from '@/components/RecentTransactions';
 
