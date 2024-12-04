@@ -2,10 +2,12 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "baseUrl": "./app",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["*"],
+      "@redux/*": ["./redux/*"],
+      "@components/*": ["./components/*"],
+      "@/types/*": ["./types/*"]
     }
   },
   "include": [

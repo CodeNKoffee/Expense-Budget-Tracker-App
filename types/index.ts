@@ -7,3 +7,15 @@ export type ExternalLinkProps = {
   children: React.ReactNode;
   style?: object;
 };
+
+export interface Transaction {
+  id: string;
+  merchant: string;
+  amount: number;
+  date: string;
+  description: string;
+}
+
+export interface TransactionsState {
+  transactions: [],
+}

@@ -1,11 +1,11 @@
 import { StyleSheet, Image, Platform } from 'react-native';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/shared/ThemedText';
-import { ThemedView } from '@/components/shared/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Collapsible } from '../../components/Collapsible';
+import { ExternalLink } from '../../components/ExternalLink';
+import ParallaxScrollView from '../../components/ParallaxScrollView';
+import { ThemedText } from '../../components/shared/ThemedText';
+import { IconSymbol } from '../../components/ui/IconSymbol.ios';
+import { ThemedView } from '../../components/shared/ThemedView';
 
 export default function TransactionsScreen() {
   return (

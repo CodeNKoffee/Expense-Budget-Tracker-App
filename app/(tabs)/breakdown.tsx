@@ -2,8 +2,8 @@ import React from 'react';
 import { ScrollView, Dimensions, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
-import { ThemedText } from '@/components/shared/ThemedText';
-import { ExternalLink } from '@/components/ExternalLink';
+import { ThemedText } from '../../components/shared/ThemedText';
+import { ExternalLink } from '../../components/ExternalLink';
 
 // Data for PieChart and BarChart
 const expenseData = [
