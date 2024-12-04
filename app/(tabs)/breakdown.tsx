@@ -48,7 +48,7 @@ export default function BreakdownScreen() {
     <SafeAreaView className="flex-1 bg-budget-charcoal">
       <ScrollView className="px-8 py-4 flex flex-col" contentContainerStyle={{ paddingBottom: 20 }}>
         <View className="mb-8">
-          <ThemedText style={styles.sectionHeader}>Expense Breakdown</ThemedText>
+          <ThemedText style={styles.sectionHeader}>Expense Breakdown 📊</ThemedText>
         </View>
 
         {/* Pie Chart */}
