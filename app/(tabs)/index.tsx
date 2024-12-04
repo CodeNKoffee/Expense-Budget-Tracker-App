@@ -3,16 +3,7 @@ import { ScrollView, View, Dimensions, StyleSheet, SafeAreaView, Text } from 're
 import { LineChart } from 'react-native-chart-kit';
 import { ThemedText } from '@/components/ThemedText';
 import { getGreeting } from '@/utils';
-
-// Dummy transaction data
-const recentTransactions = [
-  { id: 1, merchant: 'Oscar Stores', date: 'Tue, 25 May • 4:40 PM', amount: '$200', description: 'Groceries' },
-  { id: 2, merchant: 'Bolt', date: 'Mon, 18 May • 12:10 PM', amount: '$50', description: 'Transportation' },
-  { id: 3, merchant: 'Shahid', date: 'Wed, 12 May • 2:49 AM', amount: '$150', description: 'Entertainment' },
-  { id: 4, merchant: 'AirBnB', date: 'Sun, 5 January • 1:19 AM', amount: '$300', description: 'Rent' },
-  { id: 5, merchant: 'Resltess Coffeehouse', date: 'Sat, 4 January • 3:40 PM', amount: '$20', description: 'Coffee' },
-  // Add more transactions as needed
-];
+import RecentTransactions from '@/components/RecentTransactions';
 
 const chartConfig = {
   backgroundGradientFrom: '#101010',
@@ -35,31 +26,31 @@ export default function HomeScreen() {
   const screenWidth = Dimensions.get('window').width;
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+    <SafeAreaView className='flex-1 bg-budget-charcoal'>
+      <ScrollView className='px-8 py-4 flex flex-col'>
         {/* Header */}
-        <View style={styles.header}>
+        <View className='mb-12 items-center'>
           <ThemedText style={styles.greeting}>{getGreeting().message}, Hatem</ThemedText>
         </View>
 
         {/* Financial Stats */}
-        <View style={styles.statContainer}>
-          <View style={styles.statItem}>
+        <View className='flex flex-row justify-between mb-12'>
+          <View className='flex-1 items-center'>
             <ThemedText style={styles.statLabel}>Total Income</ThemedText>
             <ThemedText style={styles.statValue}>${totalIncome.toFixed(2)}</ThemedText>
           </View>
-          <View style={styles.statItem}>
+          <View className='flex-1 items-center'>
             <ThemedText style={styles.statLabel}>Total Expenses</ThemedText>
             <ThemedText style={styles.statValue}>${totalExpenses.toFixed(2)}</ThemedText>
           </View>
-          <View style={styles.statItem}>
+          <View className='flex-1 items-center'>
             <ThemedText style={styles.statLabel}>Remaining</ThemedText>
             <ThemedText style={styles.statValue}>${remainingBalance.toFixed(2)}</ThemedText>
           </View>
         </View>
 
         {/* Line Chart */}
-        <View style={styles.chartContainer}>
+        <View className='mb-10'>
           <ThemedText style={styles.chartTitle}>Spending Over Time</ThemedText>
           <LineChart
             data={{
@@ -78,54 +69,18 @@ export default function HomeScreen() {
         </View>
 
         {/* Recent Transactions List */}
-        <View className='rounded-3xl bg-budget-snow px-6 py-4' style={styles.chartContainer}>
-          <Text className='text-lg font-bold text-budget-silver '>Recent Transactions</Text>
-          <ScrollView>
-            {recentTransactions.slice(0, 10).map((transaction) => (
-              <View key={transaction.id} className='border-b-[0.5px] border-budget-silver w-full py-4 flex flex-row justify-between items-center'>
-                <View className='flex lex-col justify-between items-start'>
-                  <Text className='text-budget-midnight font-bold text-md'>{transaction.merchant}</Text>
-                  <Text className='text-budget-tangerine font-semibold text-sm'>{transaction.description}</Text>
-                  <Text className='text-budget-midnight text-sm'>{transaction.date}</Text>
-                </View>
-                <Text className='text-budget-charcoal font-bold text-xl'>
-                  {transaction.amount}
-                </Text>
-              </View>
-            ))}
-          </ScrollView>
-        </View>
+        <RecentTransactions />
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#101010',
-  },
-  scrollContent: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  header: {
-    marginBottom: 20,
-    alignItems: 'center',
-  },
   greeting: {
     fontSize: 24,
     color: '#FFF',
     fontWeight: 'bold',
-  },
-  statContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 30,
-  },
-  statItem: {
-    alignItems: 'center',
-    flex: 1,
+    marginTop: 8,
   },
   statLabel: {
     fontSize: 14,
@@ -137,19 +92,11 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontWeight: 'bold',
   },
-  chartContainer: {
-    marginBottom: 30,
-  },
   chartTitle: {
     fontSize: 16,
     color: '#FFF',
     marginBottom: 10,
     alignSelf: 'center',
     fontWeight: '600',
-  },
-  transactionItem: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
   },
 });
