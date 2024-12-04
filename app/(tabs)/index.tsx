@@ -6,6 +6,7 @@ import { calculateTotalExpenses, calculateTotalIncome, getGreeting } from '@/uti
 import RecentTransactions from '@/components/RecentTransactions';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
 import { fetchTransactions } from '@/redux/transactionsSlice';
+import { useTranslation } from 'react-i18next';
 
 const chartConfig = {
   backgroundGradientFrom: '#101010',
@@ -22,6 +23,7 @@ const chartConfig = {
 
 export default function HomeScreen() {
   const screenWidth = Dimensions.get('window').width;
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch(); // Use useAppDispatch instead of useDispatch
   const transactions = useAppSelector(state => state.transactions.transactions);
@@ -44,33 +46,33 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className='flex-1 bg-budget-charcoal'>
       {loading ? (
-        <Text className="text-center text-budget-snow text-2xl font-bold flex justify-center items-center">Loading...</Text>
+        <Text className="text-center text-budget-snow text-2xl font-bold flex justify-center items-center">{t('loading')}</Text>
       ) : (
         <ScrollView className='px-8 py-4 flex flex-col'>
           {/* Header */}
           <View className='mb-12 items-center'>
-            <ThemedText style={styles.greeting}>{getGreeting().message}, Hatem 💸</ThemedText>
+            <ThemedText style={styles.greeting}>{t(getGreeting())} Hatem 💸</ThemedText>
           </View>
 
           {/* Financial Stats */}
           <View className='flex flex-row justify-between mb-12'>
             <View className='flex-1 items-center'>
-              <ThemedText style={styles.statLabel}>Total Income</ThemedText>
+              <ThemedText style={styles.statLabel}>{t('home.totalIncome')}</ThemedText>
               <ThemedText style={styles.statValue}>${totalIncome.toFixed(2)}</ThemedText>
             </View>
             <View className='flex-1 items-center'>
-              <ThemedText style={styles.statLabel}>Total Expenses</ThemedText>
+              <ThemedText style={styles.statLabel}>{t('home.totalExpenses')}</ThemedText>
               <ThemedText style={styles.statValue}>${totalExpenses.toFixed(2)}</ThemedText>
             </View>
             <View className='flex-1 items-center'>
-              <ThemedText style={styles.statLabel}>Remaining</ThemedText>
+              <ThemedText style={styles.statLabel}>{t('home.remainingBalance')}</ThemedText>
               <ThemedText style={styles.statValue}>${remainingBalance.toFixed(2)}</ThemedText>
             </View>
           </View>
 
           {/* Line Chart */}
           <View className='mb-10'>
-            <ThemedText style={styles.chartTitle}>Spending Over Time</ThemedText>
+            <ThemedText style={styles.chartTitle}>{t('home.spendingOverTime')}</ThemedText>
             <LineChart
               data={{
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],

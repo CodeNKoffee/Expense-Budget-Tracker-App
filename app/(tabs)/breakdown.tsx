@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { ThemedText } from '../../components/shared/ThemedText';
 import { ExternalLink } from '../../components/ExternalLink';
+import { useTranslation } from 'react-i18next';
 
 // Data for PieChart and BarChart
 const expenseData = [
@@ -43,12 +44,13 @@ const chartConfig = {
 
 export default function BreakdownScreen() {
   const screenWidth = Dimensions.get('window').width;
+  const { t } = useTranslation();
 
   return (
     <SafeAreaView className="flex-1 bg-budget-charcoal">
       <ScrollView className="px-8 py-4 flex flex-col" contentContainerStyle={{ paddingBottom: 20 }}>
         <View className="mb-8">
-          <ThemedText style={styles.sectionHeader}>Expense Breakdown 📊</ThemedText>
+          <ThemedText style={styles.sectionHeader}>{t('breakdown.expenseBreakdown')}</ThemedText>
         </View>
 
         {/* Pie Chart */}
@@ -72,7 +74,7 @@ export default function BreakdownScreen() {
 
         {/* Bar Chart */}
         <View className="mb-12">
-          <ThemedText style={styles.chartTitle}>Spending Over Time</ThemedText>
+          <ThemedText style={styles.chartTitle}>{t('breakdown.spendingOverPastSixMonths')}</ThemedText>
           <StackedBarChart
             data={barData}
             width={screenWidth - 80}
@@ -96,12 +98,12 @@ export default function BreakdownScreen() {
 
         {/* Additional Analysis */}
         <View>
-          <ThemedText style={styles.subHeader}>Other Insights</ThemedText>
+          <ThemedText style={styles.subHeader}>{t('breakdown.otherInsights')}</ThemedText>
           <ExternalLink
             style={styles.insightText}
             href="https://hatemsoliman.dev"
           >
-            Discover more about financial insights and how to become wealthy here.
+            {t('breakdown.insightsLink')}
           </ExternalLink>
         </View>
       </ScrollView>

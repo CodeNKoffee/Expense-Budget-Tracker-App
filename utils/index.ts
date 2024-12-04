@@ -1,15 +1,10 @@
-import { GreetingProps, Transaction } from "@/types";
+import { Transaction } from "@/types";
 
-export function getGreeting(): GreetingProps {
-  const date: Date = new Date();
-  const hours: number = date.getHours();
-  if (hours < 12) {
-    return { message: 'Good morning' };
-  } else if (hours < 18) {
-    return { message: 'Good afternoon' };
-  } else {
-    return { message: 'Good evening' };
-  }
+export function getGreeting(): string {
+  const hours = new Date().getHours();
+  if (hours < 12) return 'home.goodMorning';
+  if (hours < 18) return 'home.goodAfternoon';
+  return 'home.goodEvening';
 }
 
 export const calculateTotalExpenses = (transactions: Transaction[]): number => {

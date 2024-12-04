@@ -1,0 +1,61 @@
+{
+  "loading": "Wird geladen...",
+  "not-found": {
+    "title": "Ups!",
+    "description": "Du bist auf eine Seite gestoßen, die nicht existiert."
+  },
+  "home": {
+    "goodMorning": "Guten Morgen,",
+    "goodAfternoon": "Guten Tag,",
+    "goodEvening": "Guten Abend,",
+    "totalIncome": "Gesamteinkommen",
+    "totalExpenses": "Gesamtausgaben",
+    "remainingBalance": "Verfügbares Guthaben",
+    "spendingOverTime": "Ausgaben im Zeitverlauf",
+    "recentTransactions": "Letzte Transaktionen"
+  },
+  "breakdown": {
+    "expenseBreakdown": "Ausgabenübersicht 📊",
+    "spendingOverPastSixMonths": "In den letzten 6 Monaten",
+    "otherInsights": "Weitere Erkenntnisse",
+    "insightsLink": "Entdecken Sie mehr über Finanzintelligenz und Vermögensaufbau hier."
+  },
+  "transactions": {
+    "addTransaction": "Transaktion hinzufügen 🌐",
+    "date": "Datum",
+    "amount": "Betrag",
+    "type": "Art",
+    "income": "Einnahmen",
+    "expense": "Ausgaben",
+    "total": "Gesamt",
+    "currentTime": "Aktuelle Zeit verwenden",
+    "manuallyEnterTime": "Zeit manuell eingeben",
+    "add": "Hinzufügen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "confirmDelete": "Möchten Sie diese Transaktion wirklich löschen?"
+  },
+  "history": {
+    "transactionHistory": "Transaktionsverlauf 📜",
+    "deleteAll": "Alle löschen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "theme": "Design",
+    "themeOptions": {
+      "dark": "Dunkel",
+      "light": "Hell",
+      "system": "System"
+    },
+    "currency": "Währung",
+    "language": "Sprache",
+    "languages": {
+      "en": "Englisch",
+      "ar-EG": "Arabisch (Ägypten)", 
+      "ar-SA": "Arabisch (Saudi-Arabien)",
+      "fr": "Französisch",
+      "de": "Deutsch",
+      "ru": "Russisch"
+    }
+  }
+}

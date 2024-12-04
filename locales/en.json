@@ -1,0 +1,61 @@
+{
+  "loading": "Loading...",
+  "not-found": {
+    "title": "Oops!",
+    "description": "You stumbled across a screen that does not exist."
+  },
+  "home": {
+    "goodMorning": "Good morning,",
+    "goodAfternoon": "Good afternoon,",
+    "goodEvening": "Good evening,",
+    "totalIncome": "Total Income",
+    "totalExpenses": "Total Expenses",
+    "remainingBalance": "Remaining",
+    "spendingOverTime": "Spending Over Time",
+    "recentTransactions": "Recent Transactions"
+  },
+  "breakdown": {
+    "expenseBreakdown": "Expense Breakdown 📊",
+    "spendingOverPastSixMonths": "In the Past 6 months",
+    "otherInsights": "Other Insights",
+    "insightsLink": "Discover more about financial insights and how to become wealthy here."
+  },
+  "transactions": {
+    "addTransaction": "Add Transaction 🌐",
+    "date": "Date",
+    "amount": "Amount",
+    "type": "Type",
+    "income": "Income",
+    "expense": "Expense",
+    "total": "Total",
+    "currentTime": "Use current time",
+    "manuallyEnterTime": "Manually enter time",
+    "add": "Add Transaction",
+    "edit": "Edit Transaction",
+    "delete": "Delete Transaction",
+    "confirmDelete": "Are you sure you want to delete this transaction?"
+  },
+  "history": {
+    "transactionHistory": "Transaction History 📜",
+    "deleteAll": "Delete All"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "themeOptions": {
+      "dark": "Dark",
+      "light": "Light",
+      "system": "System"
+    },
+    "currency": "Currency",
+    "language": "Language",
+    "languages": {
+      "en": "English",
+      "ar-EG": "Arabic (Egypt)",
+      "ar-SA": "Arabic (Saudi Arabia)",
+      "fr": "French",
+      "de": "German",
+      "ru": "Russian"
+    }
+  }
+}
