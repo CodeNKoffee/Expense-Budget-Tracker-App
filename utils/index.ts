@@ -29,3 +29,11 @@ export const getcategorysByType = (transactions: Transaction[]) => {
       return categorys;
     }, {} as Record<string, number>);
 };
+
+export const formatCurrency = (amount: number, currency: string): string => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+  });
+  return formatter.format(amount);
+};

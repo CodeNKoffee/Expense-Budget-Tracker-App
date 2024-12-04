@@ -7,6 +7,8 @@ import RecentTransactions from '@/components/RecentTransactions';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
 import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useTranslation } from 'react-i18next';
+import { formatCurrency } from '@/utils';
+import { useCurrency } from '../_layout';
 
 const chartConfig = {
   backgroundGradientFrom: '#101010',
@@ -24,6 +26,7 @@ const chartConfig = {
 export default function HomeScreen() {
   const screenWidth = Dimensions.get('window').width;
   const { t } = useTranslation();
+  const { currency } = useCurrency();
 
   const dispatch = useAppDispatch(); // Use useAppDispatch instead of useDispatch
   const transactions = useAppSelector(state => state.transactions.transactions);
@@ -58,15 +61,15 @@ export default function HomeScreen() {
           <View className='flex flex-row justify-between mb-12'>
             <View className='flex-1 items-center'>
               <ThemedText style={styles.statLabel}>{t('home.totalIncome')}</ThemedText>
-              <ThemedText style={styles.statValue}>${totalIncome.toFixed(2)}</ThemedText>
+              <ThemedText style={styles.statValue}>{formatCurrency(totalIncome, currency)}</ThemedText>
             </View>
             <View className='flex-1 items-center'>
               <ThemedText style={styles.statLabel}>{t('home.totalExpenses')}</ThemedText>
-              <ThemedText style={styles.statValue}>${totalExpenses.toFixed(2)}</ThemedText>
+              <ThemedText style={styles.statValue}>{formatCurrency(totalExpenses, currency)}</ThemedText>
             </View>
             <View className='flex-1 items-center'>
               <ThemedText style={styles.statLabel}>{t('home.remainingBalance')}</ThemedText>
-              <ThemedText style={styles.statValue}>${remainingBalance.toFixed(2)}</ThemedText>
+              <ThemedText style={styles.statValue}>{formatCurrency(remainingBalance, currency)}</ThemedText>
             </View>
           </View>
 

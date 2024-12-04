@@ -18,7 +18,7 @@ module.exports = {
         "budget-snow": "#FEFEFE",
         "budget-tangerine": "#F76D35",
         "budget-expense": "#FF1919",
-        "budget-income": "#00FF48",
+        "budget-income": "#00B232",
       }
     },
   },

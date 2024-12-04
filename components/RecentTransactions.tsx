@@ -3,10 +3,13 @@ import { Text, ScrollView, View, I18nManager } from "react-native";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useTranslation } from 'react-i18next';
+import { formatCurrency } from '@/utils';
+import { useCurrency } from '@/app/_layout';
 
 export default function RecentTransactions() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);
   const { t } = useTranslation();
+  const { currency } = useCurrency();
 
   return (
     <View className="rounded-3xl bg-budget-snow px-6 py-4 flex flex-col" style={{ height: 250 }}>
@@ -41,7 +44,7 @@ export default function RecentTransactions() {
                     : "text-budget-expense"
                 } font-bold text-xl`}
               >
-                ${transaction.amount}
+                {formatCurrency(transaction.amount, currency)}
               </Text>
             </View>
           );

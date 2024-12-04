@@ -4,11 +4,14 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
 import { fetchTransactions } from "@/redux/transactionsSlice";
 import { ThemedText } from "../../components/shared/ThemedText";
 import { useTranslation } from "react-i18next";
+import { formatCurrency } from "@/utils";
+import { useCurrency } from "../_layout";
 
 export default function HistoryScreen() {
   const dispatch = useAppDispatch();
   const transactions = useAppSelector((state) => state.transactions.transactions);
   const { t } = useTranslation();
+  const { currency } = useCurrency();
 
   const [loading, setLoading] = useState(true);
 
@@ -61,7 +64,7 @@ export default function HistoryScreen() {
                       : "text-budget-expense"
                   } font-bold text-xl`}
                 >
-                  ${transaction.amount}
+                  {formatCurrency(transaction.amount, currency)}
                 </Text>
               </View>
             );
