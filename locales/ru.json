@@ -40,7 +40,7 @@
     "deleteAll": "Удалить все"
   },
   "settings": {
-    "title": "Настройки",
+    "title": "Настройки ⚙️",
     "theme": "Тема",
     "themeOptions": {
       "dark": "Темная",

@@ -51,7 +51,9 @@ const SettingsScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-budget-charcoal">
       <View className="px-8 py-4">
-        <ThemedText style={styles.sectionHeader}>{t('settings.title')}</ThemedText>
+        <View className='mb-8 items-center'>
+          <ThemedText style={styles.sectionHeader}>{t('settings.title')}</ThemedText>
+        </View>
 
         {/* Theme Selector */}
         <View className="mb-4">
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#FFF',
     fontWeight: 'bold',
-    marginBottom: 16,
+    paddingTop: 16,
   },
   label: {
     fontSize: 16,

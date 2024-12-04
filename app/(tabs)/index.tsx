@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#FFF',
     fontWeight: 'bold',
-    marginTop: 8,
   },
   statLabel: {
     fontSize: 14,

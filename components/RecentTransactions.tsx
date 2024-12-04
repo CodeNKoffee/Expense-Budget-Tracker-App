@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView, View } from "react-native";
+import { Text, ScrollView, View, I18nManager } from "react-native";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useTranslation } from 'react-i18next';
@@ -9,8 +9,12 @@ export default function RecentTransactions() {
   const { t } = useTranslation();
 
   return (
-    <View className='rounded-3xl bg-budget-snow px-6 py-4' style={{ height: 250 }}>
-      <Text className='text-lg font-bold text-budget-silver pb-2'>{t('home.recentTransactions')}</Text>
+    <View className='rounded-3xl bg-budget-snow px-6 py-4 flex flex-col' style={{ height: 250 }}>
+      <Text
+        className={`text-lg font-bold text-budget-silver pb-2 ${I18nManager.isRTL ? 'items-start' : 'items-end'}`}
+      >
+        {t('home.recentTransactions')}
+      </Text>
       <ScrollView>
         {transactions.slice(0, 10).map((transaction) => (
           <View key={transaction.id} className='border-b-[0.5px] border-budget-silver w-full py-4 flex flex-row justify-between items-center'>

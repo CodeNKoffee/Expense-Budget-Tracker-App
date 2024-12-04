@@ -24,8 +24,10 @@ export default function HistoryScreen() {
   return (
     <SafeAreaView className="flex-1 bg-budget-charcoal">
       <ScrollView className="px-8 py-4">
-        <View className="mb-8">
-          <ThemedText style={styles.sectionHeader}>{t('history.transactionHistory')}</ThemedText>
+        <View className="mb-8 items-center">
+          <ThemedText style={styles.sectionHeader}>
+            {t('history.transactionHistory')}
+          </ThemedText>
         </View>
 
         {loading ? (
@@ -54,5 +56,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#FFF',
     fontWeight: 'bold',
+    paddingTop: 16,
   },
 });

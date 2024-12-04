@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Dimensions, StyleSheet, View } from 'react-native';
+import { ScrollView, Dimensions, StyleSheet, View, I18nManager } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { ThemedText } from '../../components/shared/ThemedText';
@@ -49,8 +49,10 @@ export default function BreakdownScreen() {
   return (
     <SafeAreaView className="flex-1 bg-budget-charcoal">
       <ScrollView className="px-8 py-4 flex flex-col" contentContainerStyle={{ paddingBottom: 20 }}>
-        <View className="mb-8">
-          <ThemedText style={styles.sectionHeader}>{t('breakdown.expenseBreakdown')}</ThemedText>
+        <View className="mb-8 items-center">
+          <ThemedText style={[styles.sectionHeader]}>
+            {t('breakdown.expenseBreakdown')}
+          </ThemedText>
         </View>
 
         {/* Pie Chart */}
@@ -116,6 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#FFF',
     fontWeight: 'bold',
+    paddingTop: 16,
   },
   chartTitle: {
     fontSize: 18,
