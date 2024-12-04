@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { Transaction } from '../types';
 
-const MOCKAPI_BASE_URL = "XXXXXXXX"
+const MOCKAPI_BASE_URL = process.env.EXPO_PUBLIC_MOCKAPI_BASE_URL;
+
+if (!MOCKAPI_BASE_URL) {
+  throw new Error('MOCKAPI_BASE_URL is not defined');
+}
 
 export const MockApiService = {
   async fetchTransactions(): Promise<Transaction[]> {
