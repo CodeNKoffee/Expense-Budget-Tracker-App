@@ -6,7 +6,7 @@ import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { ThemedText } from '../../components/shared/ThemedText';
 
-const SettingsScreen = () => {
+export default function SettingsScreen() {
   const { t } = useTranslation();
 
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('dark');
@@ -56,9 +56,9 @@ const SettingsScreen = () => {
         </View>
 
         {/* Theme Selector */}
-        <View className="mb-4">
-          <ThemedText style={styles.label}>{t('settings.theme')}</ThemedText>
-          <View className="flex flex-row justify-between">
+        <View className="mb-4 flex flex-col gap-4">
+          <ThemedText className='text-2xl font-bold ml-2' style={styles.label}>{t('settings.theme')}</ThemedText>
+          <View className="flex flex-row justify-evenly">
             {['dark', 'light', 'system'].map((option) => (
               <TouchableOpacity
                 key={option}
@@ -75,8 +75,8 @@ const SettingsScreen = () => {
         </View>
 
         {/* Currency Selector */}
-        <View className="mb-4">
-          <ThemedText style={styles.label}>{t('settings.currency')}</ThemedText>
+        <View className="mb-4 flex flex-col gap-4">
+          <ThemedText className='text-2xl font-bold ml-2' style={styles.label}>{t('settings.currency')}</ThemedText>
           <Picker
             selectedValue={currency}
             onValueChange={handleCurrencyChange}
@@ -89,8 +89,8 @@ const SettingsScreen = () => {
         </View>
 
         {/* Language Selector */}
-        <View className="mb-4">
-          <ThemedText style={styles.label}>{t('settings.language')}</ThemedText>
+        <View className="mb-4 flex flex-col gap-4">
+          <ThemedText className='text-2xl font-bold ml-2' style={styles.label}>{t('settings.language')}</ThemedText>
           <Picker
             selectedValue={language}
             onValueChange={handleLanguageChange}
@@ -114,28 +114,24 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   label: {
-    fontSize: 16,
     color: '#FFF',
-    fontWeight: '600',
   },
   picker: {
     backgroundColor: '#FFF',
-    borderRadius: 8,
+    borderRadius: 24,
     color: '#000',
   },
   option: {
     padding: 10,
-    backgroundColor: '#494949',
+    backgroundColor: '#ACACAC',
     borderRadius: 8,
     marginHorizontal: 5,
   },
   selectedOption: {
-    backgroundColor: '#A6A6A6',
+    backgroundColor: '#F76D35',
   },
   optionText: {
     color: '#FFF',
     fontSize: 16,
   },
 });
-
-export default SettingsScreen;
