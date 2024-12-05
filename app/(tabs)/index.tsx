@@ -33,7 +33,7 @@ export default function HomeScreen() {
 
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [userName, setUserName] = useState('Hatem');  // State to store the dynamic name
+  const [userName, setUserName] = useState('Captain');  // State to store the dynamic name
   const [inputValue, setInputValue] = useState('');  // For user input in the modal
 
   useEffect(() => {
