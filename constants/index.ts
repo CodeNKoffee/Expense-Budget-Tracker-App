@@ -1,4 +1,7 @@
 // Home Screen
+
+import { Currency } from "@/types";
+
 // Data for LineChart
 export const lineChartConfig = {
   backgroundGradientFrom: '#101010',
@@ -49,3 +52,27 @@ export const chartConfig = {
     stroke: '#ffa726',
   },
 };
+
+
+// Settings Screen
+// List of supported currencies
+export const supportCurrencies = [
+  'USD', 
+  'GBP', 
+  'EUR', 
+  'EGP', 
+  'SAR', 
+  'AED', 
+  'CAD', 
+  'RUB'
+];
+
+// List of supported languages
+export const supportLanguages = [
+  'en', 
+  'ar-EG', 
+  'ar-SA', 
+  'fr', 
+  'de', 
+  'ru'
+]

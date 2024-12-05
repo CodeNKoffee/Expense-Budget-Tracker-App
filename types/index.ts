@@ -1,3 +1,5 @@
+import { supportCurrencies } from "@/constants";
+
 export type ExternalLinkProps = {
   href: string;
   children: React.ReactNode;
@@ -22,3 +24,6 @@ export type TransactionListProps = {
   maxItems?: number;
   whiteBG?: boolean;
 };
+
+// Union type of all the elements in the supportCurrencies array
+export type Currency = typeof supportCurrencies[number]

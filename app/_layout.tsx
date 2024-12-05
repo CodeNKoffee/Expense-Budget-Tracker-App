@@ -13,6 +13,7 @@ import i18n from '@/localization';
 import { formatCurrency } from '@/utils';
 import { useColorScheme } from '../hooks/useColorScheme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Currency } from '@/types';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -20,13 +21,13 @@ SplashScreen.preventAutoHideAsync();
 // Create a context to provide the currency throughout the app
 const CurrencyContext = createContext({
   currency: 'USD',
-  setCurrency: (currency: string) => {},
+  setCurrency: (currency: Currency) => {},
 });
 
 export const useCurrency = () => useContext(CurrencyContext);
 
 export default function RootLayout() {
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState<Currency>('USD');
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),

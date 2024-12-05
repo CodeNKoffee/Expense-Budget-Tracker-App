@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { supportCurrencies, supportLanguages } from '@/constants';
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
@@ -104,7 +105,7 @@ export default function SettingsScreen() {
             onValueChange={handleCurrencyChange}
             style={styles.picker}
           >
-            {['USD', 'GBP', 'EUR', 'EGP', 'SAR', 'AED', 'CAD', 'RUB'].map((cur) => (
+            {supportCurrencies.map((cur) => (
               <Picker.Item key={cur} label={cur} value={cur} />
             ))}
           </Picker>
@@ -118,7 +119,7 @@ export default function SettingsScreen() {
             onValueChange={handleLanguageChange}
             style={styles.picker}
           >
-            {['en', 'ar-EG', 'ar-SA', 'fr', 'de', 'ru'].map((lang) => (
+            {supportLanguages.map((lang) => (
               <Picker.Item key={lang} label={t(`settings.languages.${lang}`)} value={lang} />
             ))}
           </Picker>

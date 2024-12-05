@@ -1,7 +1,7 @@
 // React and React hooks
 import React, { useState } from 'react';
 // Third-party libraries
-import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView, I18nManager } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -40,7 +40,7 @@ export default function TransactionForm() {
   const { t } = useTranslation();
 
   const [transactionType, setTransactionType] = useState<'income' | 'expense'>('expense');
-  const [useCurrentTime, setUseCurrentTime] = useState(false);
+  const [useCurrentTime, setUseCurrentTime] = useState<boolean>(false);
 
   const handleSubmit = (values: {
     merchant: string;
