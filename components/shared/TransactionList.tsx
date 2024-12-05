@@ -8,9 +8,15 @@ import { TransactionListProps } from "@/types";
 export default function TransactionList({ transactions, maxItems, whiteBG }: TransactionListProps) {
   const { currency } = useCurrency();
 
+  // Determine how many transactions to slice
+  const sliceCount = maxItems ?? transactions.length; // Use maxItems or default to all transactions
+  const transactionsToDisplay = [...transactions]
+    .slice(-sliceCount) // Take the last N items
+    .reverse(); // Reverse to show the most recent first
+
   return (
     <ScrollView>
-      {transactions.slice(0, maxItems || transactions.length).map((transaction, index) => {
+      {transactionsToDisplay.slice(0, maxItems || transactions.length).map((transaction, index) => {
         const useAlternateLogic = Math.floor(index / 3) % 2 === 1;
 
         return (
