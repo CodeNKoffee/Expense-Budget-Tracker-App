@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { RootState } from '@/redux/store';
 import { formatCurrency } from '@/utils';
 import { useCurrency } from '@/app/_layout';
+import TransactionList from './shared/TransactionList';
 
 export default function RecentTransactions() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);
@@ -24,38 +25,7 @@ export default function RecentTransactions() {
       >
         {t('home.recentTransactions')}
       </Text>
-      <ScrollView>
-        {transactions.slice(0, 10).map((transaction, index) => {
-          // Flip the logic every 7 transactions
-          const useAlternateLogic = Math.floor(index / 3) % 2 === 1;
-
-          return (
-            <View
-              key={transaction.id}
-              className="border-b-[0.5px] border-budget-silver w-full py-4 flex flex-row justify-between items-center"
-            >
-              <View className="flex flex-col justify-between items-start">
-                <Text className="text-budget-midnight font-bold text-md">{transaction.merchant}</Text>
-                <Text className="text-budget-tangerine font-semibold text-sm">{transaction.category}</Text>
-                <Text className="text-budget-midnight text-sm">{transaction.date}</Text>
-              </View>
-              <Text
-                className={`${
-                  useAlternateLogic
-                    ? !transaction.type
-                      ? "text-budget-income"
-                      : "text-budget-expense"
-                    : transaction.type
-                    ? "text-budget-income"
-                    : "text-budget-expense"
-                } font-bold text-xl`}
-              >
-                {formatCurrency(transaction.amount, currency)}
-              </Text>
-            </View>
-          );
-        })}
-      </ScrollView>
+      <TransactionList transactions={transactions} maxItems={10} whiteBG />
     </View>
   );
 }

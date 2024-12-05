@@ -10,9 +10,15 @@ export interface Transaction {
   category: string | null;
   amount: number;
   date: string;
-  type: 'income' | 'expense';
+  type: 'income' | 'expense' | boolean;
 }
 
 export interface TransactionsState {
   transactions: [],
 }
+
+export type TransactionListProps = {
+  transactions: Transaction[];
+  maxItems?: number;
+  whiteBG?: boolean;
+};
