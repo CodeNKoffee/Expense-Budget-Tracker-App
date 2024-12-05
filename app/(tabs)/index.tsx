@@ -16,6 +16,7 @@ import SplashScreen from '@/components/shared/LoadingScreen';
 import { lineChartConfig } from '@/constants';
 import { StatusBar } from 'expo-status-bar';
 import LoadingScreen from '@/components/shared/LoadingScreen';
+import { aggregateExpensesByMonth } from '@/utils';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -43,6 +44,10 @@ export default function HomeScreen() {
   const totalIncome = calculateTotalIncome(transactions);
   const totalExpenses = calculateTotalExpenses(transactions);
   const remainingBalance = totalIncome - totalExpenses;
+
+  const aggregatedExpenses = aggregateExpensesByMonth(transactions); 
+  const chartLabels = Object.keys(aggregatedExpenses); 
+  const chartData = Object.values(aggregatedExpenses);
 
   const handleSave = async () => {
     try {
@@ -104,10 +109,10 @@ export default function HomeScreen() {
               <Text className="text-lg font-semibold text-white mb-3">{t('home.spendingOverTime')}</Text>
               <LineChart
                 data={{
-                  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                  labels: chartLabels,
                   datasets: [
                     {
-                      data: [100, 200, 150, 300, 250, 400],
+                      data: chartData,
                     },
                   ],
                 }}

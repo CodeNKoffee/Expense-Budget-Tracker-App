@@ -1,5 +1,6 @@
 import i18n from "@/localization";
 import { Transaction } from "@/types";
+import moment from 'moment';
 
 export function getGreeting(): string {
   const hours = new Date().getHours();
@@ -38,4 +39,20 @@ export const formatCurrency = (amount: number, currency: string): string => {
     currency,
   });
   return formatter.format(amount);
+};
+
+export const aggregateExpensesByMonth = (transactions: Transaction[]): { [key: string]: number } => {
+  const expensesByMonth: { [key: string]: number } = {};
+
+  transactions.forEach(transaction => {
+    if (transaction.type === 'expense') {
+      const month = moment(transaction.date, 'ddd, MMM D • h:mm A').format('MMM YYYY');
+      if (!expensesByMonth[month]) {
+        expensesByMonth[month] = 0;
+      }
+      expensesByMonth[month] += transaction.amount;
+    }
+  });
+
+  return expensesByMonth;
 };
