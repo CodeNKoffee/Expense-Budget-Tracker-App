@@ -1,10 +1,13 @@
+// React and React hooks
 import React, { useState } from 'react';
+// Third-party libraries
 import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView } from 'react-native';
-import { useAppDispatch } from '@/hooks/useAppDispatch';
-import { addTransaction } from '@/redux/transactionsSlice';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+// Utilities and hooks
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { addTransaction } from '@/redux/transactionsSlice';
 
 const dateFormat = new Intl.DateTimeFormat('en-US', {
   weekday: 'short',
@@ -74,6 +77,7 @@ export default function TransactionForm() {
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
         <ScrollView className="p-5">
+
           {/* Merchant Field */}
           <View className="mb-4">
             <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.merchant')}</Text>
@@ -81,7 +85,7 @@ export default function TransactionForm() {
               onChangeText={handleChange('merchant')}
               onBlur={handleBlur('merchant')}
               value={values.merchant}
-              className={`bg-white border-4 border-budget-tangerine mb-4 p-3 rounded-2xl ${
+              className={`rounded-2xl bg-white border-4 border-budget-tangerine mb-4 p-3 ${
                 errors.merchant && touched.merchant ? 'border-red-500' : ''
               }`}
             />
@@ -97,7 +101,7 @@ export default function TransactionForm() {
               onChangeText={handleChange('category')}
               onBlur={handleBlur('category')}
               value={values.category}
-              className={`bg-white border-4 border-budget-tangerine mb-4 p-3 rounded-2xl ${
+              className={`rounded-2xl bg-white border-4 border-budget-tangerine mb-4 p-3 ${
                 errors.category && touched.category ? 'border-red-500' : ''
               }`}
             />
@@ -114,7 +118,7 @@ export default function TransactionForm() {
               onBlur={handleBlur('amount')}
               value={values.amount}
               keyboardType="numeric"
-              className={`bg-white border-4 border-budget-tangerine mb-4 p-3 rounded-2xl ${
+              className={`rounded-2xl bg-white border-4 border-budget-tangerine mb-4 p-3 ${
                 errors.amount && touched.amount ? 'border-red-500' : ''
               }`}
             />
@@ -126,7 +130,7 @@ export default function TransactionForm() {
           {/* Transaction Type - Toggle Switch */}
           <View className="mb-4">
             <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.transactionType')}</Text>
-            <View className="flex flex-row items-center justify-between">
+            <View className="flex flex-row justify-between items-center">
               <Text className="text-white text-sm">{t('transactions.expense')}</Text>
               <Switch
                 value={transactionType === 'income'}
@@ -159,7 +163,7 @@ export default function TransactionForm() {
               />
               <Text className="text-white text-sm">{t('transactions.manuallyEnterTime')}</Text>
             </View>
-            {useCurrentTime && ( // <-- Changed this condition
+            {useCurrentTime && (
               <View className='mt-4'>
                 <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.enterDate&Time')}</Text>
                 <TextInput
