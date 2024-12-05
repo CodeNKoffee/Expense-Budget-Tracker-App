@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
   picker: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#F5F5F5',
     borderRadius: 24,
     color: '#000',
   },
