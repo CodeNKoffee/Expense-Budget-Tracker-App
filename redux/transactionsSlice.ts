@@ -1,7 +1,8 @@
-// redux/transactionsSlice.ts
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { Transaction } from '../types';
 import { MockApiService } from '@/services/mockApiService';
+import { v4 as uuidv4 } from 'uuid';
+
 interface TransactionsState {
   transactions: Transaction[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -27,18 +28,6 @@ export const fetchTransactions = createAsyncThunk(
   }
 );
 
-export const addTransaction = createAsyncThunk(
-  'transactions/addTransaction',
-  async (transaction: Transaction, { rejectWithValue }) => {
-    try {
-      const newTransaction = await MockApiService.addTransaction(transaction);
-      return newTransaction;
-    } catch (error) {
-      return rejectWithValue('Failed to add transaction');
-    }
-  }
-);
-
 export const deleteTransaction = createAsyncThunk(
   'transactions/deleteTransaction',
   async (id: string, { rejectWithValue }) => {
@@ -54,7 +43,18 @@ export const deleteTransaction = createAsyncThunk(
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
-  reducers: {},
+  reducers: {
+    addTransaction: (state, action: PayloadAction<Omit<Transaction, 'id'>>) => {
+      // Generate a unique ID for the new transaction
+      const newTransaction = {
+        ...action.payload,
+        id: uuidv4(), // Generate a unique ID
+      };
+      
+      // Prepend the new transaction to the start of the array
+      state.transactions.unshift(newTransaction);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTransactions.pending, (state) => {
@@ -68,9 +68,6 @@ const transactionsSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload as string;
       })
-      .addCase(addTransaction.fulfilled, (state, action) => {
-        state.transactions.push(action.payload);
-      })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.transactions = state.transactions.filter(
           transaction => transaction.id !== action.payload
@@ -79,4 +76,5 @@ const transactionsSlice = createSlice({
   },
 });
 
+export const { addTransaction } = transactionsSlice.actions;
 export default transactionsSlice.reducer;

@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
 import { LineChart } from 'react-native-chart-kit';
 // Utilities and hooks
-import { getGreeting, formatCurrency } from '@/utils';
+import { getGreeting, formatCurrency, calculateTotalIncome, calculateTotalExpenses } from '@/utils';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
 import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useCurrency } from '../_layout';
@@ -26,6 +26,9 @@ export default function HomeScreen() {
   const [userName, setUserName] = useState('Captain');  // State to store the dynamic name
   const [inputValue, setInputValue] = useState('');  // For user input in the modal
 
+  // Select transactions from Redux store
+  const transactions = useAppSelector((state) => state.transactions.transactions);
+
   useEffect(() => {
     dispatch(fetchTransactions()).then(() => {
       setLoading(false);
@@ -34,8 +37,9 @@ export default function HomeScreen() {
     });
   }, [dispatch]);
 
-  const totalIncome = 10000;
-  const totalExpenses = 2000;
+  // Calculate total income and expenses using the utility functions
+  const totalIncome = calculateTotalIncome(transactions);
+  const totalExpenses = calculateTotalExpenses(transactions);
   const remainingBalance = totalIncome - totalExpenses;
 
   const handleSave = async () => {

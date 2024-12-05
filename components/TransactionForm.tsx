@@ -2,12 +2,13 @@
 import React, { useState } from 'react';
 // Third-party libraries
 import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView, I18nManager } from 'react-native';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 // Utilities and hooks
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { addTransaction } from '@/redux/transactionsSlice';
+import { Transaction } from '@/types';
 
 const dateFormat = new Intl.DateTimeFormat('en-US', {
   weekday: 'short',
@@ -41,26 +42,48 @@ export default function TransactionForm() {
 
   const [transactionType, setTransactionType] = useState<'income' | 'expense'>('expense');
   const [useCurrentTime, setUseCurrentTime] = useState<boolean>(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
 
-  const handleSubmit = (values: {
-    merchant: string;
-    category: string;
-    amount: string;
-    type: 'income' | 'expense';
-    date: string;
-  }) => {
+  const handleSubmit = (
+    values: {
+      merchant: string;
+      category: string;
+      amount: string;
+      date: string;
+      type: string;
+    },
+    { resetForm }: FormikHelpers<{
+      merchant: string;
+      category: string;
+      amount: string;
+      date: string;
+      type: string;
+    }>
+  ) => {
     const transactionDate = useCurrentTime
       ? values.date
       : dateFormat(new Date());
-
-    const newTransaction = {
-      ...values,
+  
+    const newTransaction: Transaction = {
+      merchant: values.merchant,
+      category: values.category,
       amount: parseFloat(values.amount),
-      type: transactionType,
+      type: transactionType, // Use the state variable instead of values.type
       date: transactionDate,
     };
-
+  
     dispatch(addTransaction(newTransaction));
+    
+    // Reset form and show success message
+    resetForm();
+    setTransactionType('expense');
+    setUseCurrentTime(false);
+    setShowSuccessMessage(true);
+  
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 3000);
   };
 
   return (
@@ -77,6 +100,14 @@ export default function TransactionForm() {
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
         <ScrollView className="p-5">
+          {/* Success Message */}
+          {showSuccessMessage && (
+            <View className="bg-green-500 p-4 rounded-2xl mb-4">
+              <Text className="text-white text-center font-bold">
+                {t('transactions.successMessage')}
+              </Text>
+            </View>
+          )}
 
           {/* Merchant Field */}
           <View className="mb-4">
