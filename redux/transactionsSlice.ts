@@ -56,7 +56,7 @@ const transactionsSlice = createSlice({
       };
       
       // Prepend the new transaction to the start of the array
-      state.transactions.unshift(newTransaction);
+      state.transactions.push(newTransaction);
     },
   },
   extraReducers: (builder) => {
