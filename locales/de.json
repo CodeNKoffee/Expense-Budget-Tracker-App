@@ -37,7 +37,8 @@
     "add": "Hinzufügen",
     "edit": "Bearbeiten",
     "delete": "Löschen",
-    "confirmDelete": "Möchten Sie diese Transaktion wirklich löschen?"
+    "confirmDelete": "Möchten Sie diese Transaktion wirklich löschen?",
+    "successMessage": "Transaktion hinzugefügt!"
   },
   "history": {
     "transactionHistory": "Transaktionsverlauf 📜",

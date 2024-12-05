@@ -37,7 +37,8 @@
     "add": "Ajouter",
     "edit": "Modifier",
     "delete": "Supprimer",
-    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette transaction ?"
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette transaction ?",
+    "successMessage": "Transaction ajoutée !"
   },
   "history": {
     "transactionHistory": "Historique des transactions 📜",
