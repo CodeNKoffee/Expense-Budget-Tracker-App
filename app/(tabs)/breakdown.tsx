@@ -100,11 +100,11 @@ export default function BreakdownScreen() {
 
             {/* Additional Analysis */}
             <View>
-              <Text className="text-white text-base font-semibold mb-2">
+              <Text className="text-white text-base font-semibold text-center mb-2">
                 {t('breakdown.otherInsights')}
               </Text>
               <ExternalLink
-                className="text-budget-silver text-sm"
+                className="text-budget-silver text-sm text-center"
                 href="https://hatemsoliman.dev"
               >
                 {t('breakdown.insightsLink')}

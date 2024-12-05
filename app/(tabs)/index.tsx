@@ -107,7 +107,7 @@ export default function HomeScreen() {
 
             {/* Line Chart */}
             <View className='mb-10'>
-              <Text className="text-lg font-semibold text-white mb-3">{t('home.spendingOverTime')}</Text>
+              <Text className="text-lg font-semibold text-white text-center mb-3">{t('home.spendingOverTime')}</Text>
               <LineChart
                 data={{
                   labels: chartLabels,
