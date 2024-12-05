@@ -10,7 +10,7 @@ import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { barData, chartConfig, expenseData } from '@/constants';
 // Components
-import SplashScreen from '@/components/shared/SplashScreen';
+import SplashScreen from '@/components/shared/LoadingScreen';
 import { ExternalLink } from '@/components/ExternalLink';
 
 export default function BreakdownScreen() {

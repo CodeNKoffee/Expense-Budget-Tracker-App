@@ -12,7 +12,7 @@ import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useCurrency } from '../_layout';
 // Components
 import RecentTransactions from '@/components/RecentTransactions';
-import SplashScreen from '@/components/shared/SplashScreen';
+import SplashScreen from '@/components/shared/LoadingScreen';
 import { lineChartConfig } from '@/constants';
 import { StatusBar } from 'expo-status-bar';
 

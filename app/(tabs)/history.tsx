@@ -9,7 +9,7 @@ import { fetchTransactions } from "@/redux/transactionsSlice";
 import { formatCurrency } from "@/utils";
 import { useCurrency } from "../_layout";
 // Components
-import SplashScreen from "@/components/shared/SplashScreen";
+import SplashScreen from "@/components/shared/LoadingScreen";
 import TransactionList from "@/components/shared/TransactionList";
 
 export default function HistoryScreen() {

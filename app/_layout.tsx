@@ -17,9 +17,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Currency } from '@/types';
 import { I18nManager, Platform, StyleSheet, View } from 'react-native';
 import RNRestart from 'react-native-restart';
+import AnimatedSplashScreen from '@/components/AnimatedSplashScreen';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+// Set the animation options. This is optional.
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: true,
+});
 
 // Create a context to provide the currency throughout the app
 const CurrencyContext = createContext({
@@ -35,6 +42,8 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+
+  const [showSplash, setShowSplash] = useState<boolean>(true);
 
   useEffect(() => {
     const isRTL = Localization.isRTL;
@@ -64,12 +73,16 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
+      SplashScreen.hideAsync().then(() => {
+        setTimeout(() => {
+          setShowSplash(false);
+        }, 2000);
+      });
     }
   }, [loaded]);
 
-  if (!loaded) {
-    return null;
+  if (!loaded || showSplash) {
+    return <AnimatedSplashScreen />;
   }
 
   return (
