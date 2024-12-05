@@ -17,6 +17,7 @@ import { Currency } from '@/types';
 import { I18nManager, Platform } from 'react-native';
 import RNRestart from 'react-native-restart';
 import AnimatedSplashScreen from '@/components/AnimatedSplashScreen';
+import 'react-native-get-random-values';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

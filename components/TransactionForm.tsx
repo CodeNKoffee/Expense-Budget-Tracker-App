@@ -44,7 +44,7 @@ export default function TransactionForm() {
   const [useCurrentTime, setUseCurrentTime] = useState<boolean>(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
 
-  const handleSubmit = (
+  const handleAddTransaction = (
     values: {
       merchant: string;
       category: string;
@@ -71,6 +71,9 @@ export default function TransactionForm() {
       type: transactionType, // Use the state variable instead of values.type
       date: transactionDate,
     };
+
+    // Log the transaction before dispatching
+    console.log('Attempting to add transaction:', newTransaction);
   
     dispatch(addTransaction(newTransaction));
     
@@ -96,7 +99,7 @@ export default function TransactionForm() {
         type: 'expense',
       }}
       validationSchema={validationSchema}
-      onSubmit={handleSubmit}
+      onSubmit={handleAddTransaction}
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
         <ScrollView className="p-5">

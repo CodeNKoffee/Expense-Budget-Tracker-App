@@ -49,6 +49,10 @@ const transactionsSlice = createSlice({
       const newTransaction = {
         ...action.payload,
         id: uuidv4(), // Generate a unique ID
+        // Normalize the type to ensure it's either 'income' or 'expense'
+        type: action.payload.type === true ? 'income' : 
+              action.payload.type === false ? 'expense' : 
+              action.payload.type
       };
       
       // Prepend the new transaction to the start of the array
