@@ -13,15 +13,13 @@ import TransactionList from './shared/TransactionList';
 export default function RecentTransactions() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);
   const { t } = useTranslation();
-  const isRTL = I18nManager.isRTL;
-  const { currency } = useCurrency();
 
   return (
     <View 
       className="rounded-3xl bg-budget-snow px-6 py-4 flex flex-col" 
       style={{ height: 250 }}
     >
-      <View className={`w-full flex ${isRTL ? 'items-start' : 'items-end'}`}>
+      <View className='w-full flex items-center'>
         <Text
           className={`text-lg font-bold text-budget-silver pb-2`}
         >

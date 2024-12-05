@@ -119,7 +119,7 @@ export default function TransactionForm() {
 
           {/* Merchant Field */}
           <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.merchant')}</Text>
+            <Text className="text-lg font-bold mb-2 text-budget-snow text-center">{t('transactions.merchant')}</Text>
             <TextInput
               onChangeText={handleChange('merchant')}
               onBlur={handleBlur('merchant')}
@@ -135,7 +135,7 @@ export default function TransactionForm() {
 
           {/* Category Field */}
           <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.category')}</Text>
+            <Text className="text-lg font-bold mb-2 text-budget-snow text-center">{t('transactions.category')}</Text>
             <TextInput
               onChangeText={handleChange('category')}
               onBlur={handleBlur('category')}
@@ -151,7 +151,7 @@ export default function TransactionForm() {
 
           {/* Amount Field */}
           <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.amount')}</Text>
+            <Text className="text-lg font-bold mb-2 text-budget-snow text-center">{t('transactions.amount')}</Text>
             <TextInput
               onChangeText={handleChange('amount')}
               onBlur={handleBlur('amount')}
@@ -167,8 +167,8 @@ export default function TransactionForm() {
           </View>
 
           {/* Transaction Type - Toggle Switch */}
-          <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.transactionType')}</Text>
+          <View className="mb-8">
+            <Text className="text-lg font-bold mb-4 text-budget-snow text-center">{t('transactions.transactionType')}</Text>
             <View className="flex flex-row justify-between items-center">
               <Text className="text-white text-sm">{t('transactions.expense')}</Text>
               <Switch
@@ -187,8 +187,8 @@ export default function TransactionForm() {
           </View>
 
           {/* Time Entry - Toggle Switch */}
-          <View className="mb-">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.transactionTime')}</Text>
+          <View className="mb-8">
+            <Text className="text-lg font-bold mb-4 text-budget-snow text-center">{t('transactions.transactionTime')}</Text>
             <View className="flex flex-row items-center justify-between">
               <Text className="text-white text-sm">{t('transactions.currentTime')}</Text>
               <Switch

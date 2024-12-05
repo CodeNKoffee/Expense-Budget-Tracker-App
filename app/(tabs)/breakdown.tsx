@@ -101,11 +101,11 @@ export default function BreakdownScreen() {
 
             {/* Additional Analysis */}
             <View>
-              <Text className={`text-white text-base font-semibold ${isRTL ? 'text-left' : 'text-right'} mb-2`}>
+              <Text className='text-white text-base font-semibold text-center mb-2'>
                 {t('breakdown.otherInsights')}
               </Text>
               <ExternalLink
-                className={`text-budget-silver text-sm ${isRTL ? 'text-left' : 'text-right'}`}
+                className='text-budget-silver text-center text-sm'
                 href="https://hatemsoliman.dev"
               >
                 {t('breakdown.insightsLink')}

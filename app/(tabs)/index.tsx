@@ -92,15 +92,15 @@ export default function HomeScreen() {
 
             {/* Financial Stats */}
             <View className='flex flex-col justify-between mb-8'>
-              <View className={`w-full flex-1 ${isRTL ? 'flex-row' : 'flex-row-reverse'} justify-between items-center`}>
+              <View className='w-full flex-1 flex-row justify-between items-center'>
                 <Text className="text-md text-budget-silver mb-1">{t('home.totalIncome')}</Text>
                 <Text className="text-xl font-bold text-white">{formatCurrency(totalIncome, currency)}</Text>
               </View>
-              <View className={`w-full flex-1 ${isRTL ? 'flex-row' : 'flex-row-reverse'} justify-between items-center`}>
+              <View className='w-full flex-1 flex-row justify-between items-center'>
                 <Text className="text-md text-budget-silver mb-1">{t('home.totalExpenses')}</Text>
                 <Text className="text-xl font-bold text-white">{formatCurrency(totalExpenses, currency)}</Text>
               </View>
-              <View className={`w-full flex-1 ${isRTL ? 'flex-row' : 'flex-row-reverse'} justify-between items-center`}>
+              <View className='w-full flex-1 flex-row justify-between items-center'>
                 <Text className="text-md text-budget-silver mb-1">{t('home.remainingBalance')}</Text>
                 <Text className="text-xl font-bold text-white">{formatCurrency(remainingBalance, currency)}</Text>
               </View>
