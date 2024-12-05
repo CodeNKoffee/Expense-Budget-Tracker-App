@@ -1,13 +1,11 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
+import { Tabs } from 'expo-router';
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
+// TabLayout component defines the layout and behavior of the tab navigator
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
@@ -43,7 +41,7 @@ export default function TabLayout() {
   );
 }
 
-// Define the dynamic icon name
+// getIconName function returns the appropriate icon name based on the tab name
 const getIconName = (name: string) => {
   switch (name) {
     case 'index':
@@ -61,7 +59,7 @@ const getIconName = (name: string) => {
   }
 };
 
-// Refactored Styles
+// Styles for the tab bar and icons
 const styles = StyleSheet.create({
   tabBar: {
     position: 'absolute',
@@ -86,6 +84,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// iconWrapperStyle function returns the style for the icon wrapper based on whether the tab is focused
 const iconWrapperStyle = (focused: boolean) =>
   StyleSheet.create({
     iconWrapper: {
