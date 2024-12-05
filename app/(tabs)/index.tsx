@@ -14,6 +14,7 @@ import { useCurrency } from '../_layout';
 import RecentTransactions from '@/components/RecentTransactions';
 import SplashScreen from '@/components/shared/SplashScreen';
 import { lineChartConfig } from '@/constants';
+import { StatusBar } from 'expo-status-bar';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -58,6 +59,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className="bg-budget-charcoal flex-1">
+      <StatusBar style="light" />
       <ScrollView 
         className="px-8 py-4 flex flex-col" 
         contentContainerStyle={{ paddingBottom: 20 }}
