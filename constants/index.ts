@@ -1,3 +1,18 @@
+// Home Screen
+// Data for LineChart
+export const lineChartConfig = {
+  backgroundGradientFrom: '#101010',
+  backgroundGradientTo: '#101010',
+  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+  strokeWidth: 2,
+  propsForDots: {
+    r: '4',
+    strokeWidth: '2',
+    stroke: '#ffa726',
+  },
+};
+
 // Breakdown Screen
 // Data for PieChart and BarChart
 export const expenseData = [

@@ -1,14 +1,17 @@
+// React and React hooks
 import React, { useEffect, useState } from 'react';
+// Third-party libraries
 import { ScrollView, Dimensions, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { useTranslation } from 'react-i18next';
-
-import SplashScreen from '@/components/shared/SplashScreen';
+// Utilities and hooks
 import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { barData, chartConfig, expenseData } from '@/constants';
-import { ExternalLink } from '../../components/ExternalLink';
+// Components
+import SplashScreen from '@/components/shared/SplashScreen';
+import { ExternalLink } from '@/components/ExternalLink';
 
 export default function BreakdownScreen() {
   const { t } = useTranslation();
