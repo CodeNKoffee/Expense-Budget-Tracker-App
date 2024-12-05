@@ -1,3 +1,4 @@
+import i18n from "@/localization";
 import { Transaction } from "@/types";
 
 export function getGreeting(): string {
@@ -31,7 +32,8 @@ export const getcategorysByType = (transactions: Transaction[]) => {
 };
 
 export const formatCurrency = (amount: number, currency: string): string => {
-  const formatter = new Intl.NumberFormat('en-US', {
+  const locale = i18n.language; // Get the current language/locale from i18n
+  const formatter = new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
   });

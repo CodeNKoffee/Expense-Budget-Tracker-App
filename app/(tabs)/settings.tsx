@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, StyleSheet, Switch, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import i18n from 'i18next';
@@ -13,6 +13,7 @@ export default function SettingsScreen() {
   const [currency, setCurrency] = useState('USD');
   const [language, setLanguage] = useState('en');
 
+  // Load settings from AsyncStorage when component mounts
   useEffect(() => {
     const loadSettings = async () => {
       const savedTheme = (await AsyncStorage.getItem('theme')) || 'dark';
@@ -37,9 +38,20 @@ export default function SettingsScreen() {
     saveSetting('theme', newTheme);
   };
 
+  // Use useEffect for currency update
+  useEffect(() => {
+    const updateCurrency = async () => {
+      console.log("Currency updated to:", currency); // Debug log
+      await AsyncStorage.setItem('currency', currency);
+    };
+
+    if (currency) {
+      updateCurrency();
+    }
+  }, [currency]); // This effect runs whenever currency changes
+
   const handleCurrencyChange = (newCurrency: string) => {
     setCurrency(newCurrency);
-    saveSetting('currency', newCurrency);
   };
 
   const handleLanguageChange = (newLanguage: string) => {
