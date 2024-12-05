@@ -1,55 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Dimensions, StyleSheet, View, I18nManager } from 'react-native';
+import { ScrollView, Dimensions, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
-import { ThemedText } from '../../components/shared/ThemedText';
-import { ExternalLink } from '../../components/ExternalLink';
 import { useTranslation } from 'react-i18next';
+
 import SplashScreen from '@/components/shared/SplashScreen';
 import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
-
-// Data for PieChart and BarChart
-const expenseData = [
-  { name: 'Rent', amount: 800, color: '#FF6384' },
-  { name: 'Groceries', amount: 300, color: '#36A2EB' },
-  { name: 'Utilities', amount: 150, color: '#FFCE56' },
-  { name: 'Transportation', amount: 100, color: '#4BC0C0' },
-  { name: 'Entertainment', amount: 75, color: '#9966FF' },
-];
-
-const barData = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-  legend: ['Foodics', 'Udacity', 'Timedoor'],
-  data: [
-    [800, 300, 150],
-    [700, 200, 100],
-    [600, 400, 200],
-    [500, 300, 100],
-    [400, 200, 50],
-    [300, 100, 75],
-  ],
-  barColors: ['#FF6384', '#36A2EB', '#FFCE56'],
-};
-
-const chartConfig = {
-  backgroundGradientFrom: '#101010',
-  backgroundGradientTo: '#101010',
-  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-  strokeWidth: 2,
-  propsForDots: {
-    r: '4',
-    strokeWidth: '2',
-    stroke: '#ffa726',
-  },
-};
+import { barData, chartConfig, expenseData } from '@/constants';
+import { ThemedText } from '../../components/shared/ThemedText';
+import { ExternalLink } from '../../components/ExternalLink';
 
 export default function BreakdownScreen() {
-  const screenWidth = Dimensions.get('window').width;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(true);
+  const screenWidth = Dimensions.get('window').width;
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     dispatch(fetchTransactions())
@@ -62,7 +28,7 @@ export default function BreakdownScreen() {
   }, [dispatch]);
 
   return (
-    <SafeAreaView className="flex-1 bg-budget-charcoal">
+    <SafeAreaView className="bg-budget-charcoal flex-1">
       <ScrollView className="px-8 py-4 flex flex-col" contentContainerStyle={{ paddingBottom: 20 }}>
         <View className="mb-8 items-center">
           <ThemedText style={[styles.sectionHeader]}>
