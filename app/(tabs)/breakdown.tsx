@@ -1,7 +1,7 @@
 // React and React hooks
 import React, { useEffect, useState } from 'react';
 // Third-party libraries
-import { ScrollView, Dimensions, View, Text } from 'react-native';
+import { ScrollView, Dimensions, View, Text, I18nManager } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +16,7 @@ import LoadingScreen from '@/components/shared/LoadingScreen';
 
 export default function BreakdownScreen() {
   const { t } = useTranslation();
+  const isRTL = I18nManager.isRTL;
   const dispatch = useAppDispatch();
   const screenWidth = Dimensions.get('window').width;
   const [loading, setLoading] = useState<boolean>(true);
@@ -100,11 +101,11 @@ export default function BreakdownScreen() {
 
             {/* Additional Analysis */}
             <View>
-              <Text className="text-white text-base font-semibold text-center mb-2">
+              <Text className={`text-white text-base font-semibold ${isRTL ? 'text-left' : 'text-right'} mb-2`}>
                 {t('breakdown.otherInsights')}
               </Text>
               <ExternalLink
-                className="text-budget-silver text-sm text-center"
+                className={`text-budget-silver text-sm ${isRTL ? 'text-left' : 'text-right'}`}
                 href="https://hatemsoliman.dev"
               >
                 {t('breakdown.insightsLink')}
