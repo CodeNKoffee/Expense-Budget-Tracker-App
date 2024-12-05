@@ -4,6 +4,7 @@ import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { addTransaction } from '@/redux/transactionsSlice';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 const dateFormat = new Intl.DateTimeFormat('en-US', {
   weekday: 'short',
@@ -33,6 +34,7 @@ const validationSchema = Yup.object({
 
 export default function TransactionForm() {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const [transactionType, setTransactionType] = useState<'income' | 'expense'>('expense');
   const [useCurrentTime, setUseCurrentTime] = useState(false);
@@ -74,7 +76,7 @@ export default function TransactionForm() {
         <ScrollView className="p-5">
           {/* Merchant Field */}
           <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">Merchant</Text>
+            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.merchant')}</Text>
             <TextInput
               onChangeText={handleChange('merchant')}
               onBlur={handleBlur('merchant')}
@@ -90,7 +92,7 @@ export default function TransactionForm() {
 
           {/* Category Field */}
           <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">Category</Text>
+            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.category')}</Text>
             <TextInput
               onChangeText={handleChange('category')}
               onBlur={handleBlur('category')}
@@ -106,7 +108,7 @@ export default function TransactionForm() {
 
           {/* Amount Field */}
           <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">Amount</Text>
+            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.amount')}</Text>
             <TextInput
               onChangeText={handleChange('amount')}
               onBlur={handleBlur('amount')}
@@ -123,9 +125,9 @@ export default function TransactionForm() {
 
           {/* Transaction Type - Toggle Switch */}
           <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">Transaction Type</Text>
+            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.transactionType')}</Text>
             <View className="flex flex-row items-center justify-between">
-              <Text className="text-white text-sm">Expense</Text>
+              <Text className="text-white text-sm">{t('transactions.expense')}</Text>
               <Switch
                 value={transactionType === 'income'}
                 onValueChange={(value) =>
@@ -137,15 +139,15 @@ export default function TransactionForm() {
                 }}
                 thumbColor={transactionType === 'income' ? '#FF9500' : '#FF9500'}
               />
-              <Text className="text-white text-sm">Income</Text>
+              <Text className="text-white text-sm">{t('transactions.income')}</Text>
             </View>
           </View>
 
           {/* Time Entry - Toggle Switch */}
-          <View className="mb-4">
-            <Text className="text-lg font-bold mb-2 text-budget-snow">Transaction Time</Text>
+          <View className="mb-">
+            <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.transactionTime')}</Text>
             <View className="flex flex-row items-center justify-between">
-              <Text className="text-white text-sm">Use Current Time</Text>
+              <Text className="text-white text-sm">{t('transactions.currentTime')}</Text>
               <Switch
                 value={useCurrentTime} // No change here
                 onValueChange={(value) => setUseCurrentTime(value)} // No change here
@@ -155,19 +157,21 @@ export default function TransactionForm() {
                 }}
                 thumbColor={transactionType === 'income' ? '#FF9500' : '#FF9500'}
               />
-              <Text className="text-white text-sm">Manually Enter Time</Text>
+              <Text className="text-white text-sm">{t('transactions.manuallyEnterTime')}</Text>
             </View>
             {useCurrentTime && ( // <-- Changed this condition
-              <TextInput
-                onChangeText={handleChange('date')}
-                onBlur={handleBlur('date')}
-                value={values.date}
-                placeholder="Enter date and time"
-                placeholderTextColor="#ACACAC"
-                className={`bg-white border-4 border-budget-tangerine mt-2 mb-4 p-3 rounded-2xl ${
-                  errors.date && touched.date ? 'border-red-500' : ''
-                }`}
-              />
+              <View className='mt-4'>
+                <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.enterDate&Time')}</Text>
+                <TextInput
+                  onChangeText={handleChange('date')}
+                  onBlur={handleBlur('date')}
+                  value={values.date}
+                  placeholderTextColor="#ACACAC"
+                  className={`bg-white border-4 border-budget-tangerine mt-2 mb-4 p-3 rounded-2xl ${
+                    errors.date && touched.date ? 'border-red-500' : ''
+                  }`}
+                />
+              </View>
             )}
             {errors.date && touched.date && (
               <Text className="text-red-500 text-sm">{errors.date}</Text>
@@ -179,7 +183,7 @@ export default function TransactionForm() {
             className="bg-budget-tangerine mt-4 py-4 rounded-2xl"
             onPress={handleSubmit as () => void}
           >
-            <Text className="text-white text-center font-bold text-xl">Add Transaction</Text>
+            <Text className="text-white text-center font-bold text-xl">{t('transactions.add')}</Text>
           </TouchableOpacity>
         </ScrollView>
       )}
