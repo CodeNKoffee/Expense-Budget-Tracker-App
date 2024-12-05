@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Dimensions, StyleSheet, View } from 'react-native';
+import { ScrollView, Dimensions, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,6 @@ import SplashScreen from '@/components/shared/SplashScreen';
 import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { barData, chartConfig, expenseData } from '@/constants';
-import { ThemedText } from '../../components/shared/ThemedText';
 import { ExternalLink } from '../../components/ExternalLink';
 
 export default function BreakdownScreen() {
@@ -29,11 +28,14 @@ export default function BreakdownScreen() {
 
   return (
     <SafeAreaView className="bg-budget-charcoal flex-1">
-      <ScrollView className="px-8 py-4 flex flex-col" contentContainerStyle={{ paddingBottom: 20 }}>
+      <ScrollView
+        className="flex flex-col px-8 py-4"
+        contentContainerStyle={{ paddingBottom: 20 }}
+      >
         <View className="mb-8 items-center">
-          <ThemedText style={[styles.sectionHeader]}>
+          <Text className="text-white text-2xl font-bold pt-4">
             {t('breakdown.expenseBreakdown')}
-          </ThemedText>
+          </Text>
         </View>
 
         {loading ? (
@@ -55,13 +57,15 @@ export default function BreakdownScreen() {
                 chartConfig={chartConfig}
                 accessor="population"
                 backgroundColor="transparent"
-                paddingLeft="15"
+                paddingLeft="16"
               />
             </View>
 
             {/* Bar Chart */}
             <View className="mb-12">
-              <ThemedText style={styles.chartTitle}>{t('breakdown.spendingOverPastSixMonths')}</ThemedText>
+              <Text className="text-white text-lg text-center font-semibold mb-2">
+                {t('breakdown.spendingOverPastSixMonths')}
+              </Text>
               <StackedBarChart
                 data={barData}
                 width={screenWidth - 80}
@@ -72,12 +76,19 @@ export default function BreakdownScreen() {
                   marginHorizontal: 10,
                 }}
               />
+
               {/* Custom Legend */}
-              <View className='mt-4 flex flex-row justify-center flex-wrap'>
+              <View className="mt-4 flex flex-row justify-center flex-wrap">
                 {barData.legend.map((label, index) => (
-                  <View key={index} className='mr-4 mb-2 flex flex-row items-center'>
-                    <View className='w-4 h-4 mr-4 rounded-md' style={{ backgroundColor: barData.barColors[index] }} />
-                    <ThemedText style={styles.legendText}>{label}</ThemedText>
+                  <View
+                    key={index}
+                    className="mr-4 mb-2 flex flex-row items-center"
+                  >
+                    <View
+                      className="rounded-md w-4 h-4 mr-4"
+                      style={{ backgroundColor: barData.barColors[index] }}
+                    />
+                    <Text className="text-white text-sm">{label}</Text>
                   </View>
                 ))}
               </View>
@@ -85,9 +96,11 @@ export default function BreakdownScreen() {
 
             {/* Additional Analysis */}
             <View>
-              <ThemedText style={styles.subHeader}>{t('breakdown.otherInsights')}</ThemedText>
+              <Text className="text-white text-base font-semibold mb-2">
+                {t('breakdown.otherInsights')}
+              </Text>
               <ExternalLink
-                style={styles.insightText}
+                className="text-budget-silver text-sm"
                 href="https://hatemsoliman.dev"
               >
                 {t('breakdown.insightsLink')}
@@ -99,33 +112,3 @@ export default function BreakdownScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionHeader: {
-    fontSize: 24,
-    color: '#FFF',
-    fontWeight: 'bold',
-    paddingTop: 16,
-  },
-  chartTitle: {
-    fontSize: 18,
-    color: '#FFF',
-    fontWeight: '600',
-    alignSelf: 'center',
-    marginBottom: 10,
-  },
-  legendText: {
-    fontSize: 14,
-    color: '#FFF',
-  },
-  subHeader: {
-    fontSize: 16,
-    color: '#FFF',
-    fontWeight: '600',
-    marginBottom: 5,
-  },
-  insightText: {
-    fontSize: 14,
-    color: '#7F7F7F',
-  },
-});

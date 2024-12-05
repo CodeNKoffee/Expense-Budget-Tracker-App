@@ -1,7 +1,7 @@
 export type ExternalLinkProps = {
   href: string;
   children: React.ReactNode;
-  style?: object;
+  className?: string;
 };
 
 export interface Transaction {

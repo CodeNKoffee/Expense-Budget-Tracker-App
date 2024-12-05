@@ -3,7 +3,7 @@ import { openBrowserAsync } from 'expo-web-browser';
 import { Platform } from 'react-native';
 import { TouchableOpacity, Text } from 'react-native';
 
-export function ExternalLink({ href, children, style }: ExternalLinkProps) {
+export function ExternalLink({ href, children, className }: ExternalLinkProps) {
   const handlePress = async () => {
     if (Platform.OS !== 'web') {
       // Prevent the default behavior of linking to the default browser on native.
@@ -13,7 +13,7 @@ export function ExternalLink({ href, children, style }: ExternalLinkProps) {
 
   return (
     <TouchableOpacity onPress={handlePress}>
-      <Text style={style}>{children}</Text>
+      <Text className={className}>{children}</Text>
     </TouchableOpacity>
   );
 }
