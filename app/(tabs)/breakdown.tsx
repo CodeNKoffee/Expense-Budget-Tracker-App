@@ -67,7 +67,7 @@ export default function BreakdownScreen() {
             {/* Bar Chart */}
             <View className="mb-12">
               <Text className="text-white text-lg text-center font-semibold mb-2">
-                {t('breakdown.spendingOverPastSixMonths')}
+                {t('breakdown.incomeOverPastSixMonths')}
               </Text>
               <StackedBarChart
                 data={barData}
