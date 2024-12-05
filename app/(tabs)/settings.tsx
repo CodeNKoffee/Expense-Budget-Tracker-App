@@ -1,10 +1,11 @@
+// React and React hooks
 import React, { useState, useEffect } from 'react';
+// Third-party libraries
 import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { ThemedText } from '../../components/shared/ThemedText';
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
@@ -63,15 +64,20 @@ export default function SettingsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-budget-charcoal">
+    <SafeAreaView className="bg-budget-charcoal flex-1">
       <View className="px-8 py-4">
         <View className='mb-8 items-center'>
-          <ThemedText style={styles.sectionHeader}>{t('settings.title')}</ThemedText>
+          <Text className="text-white text-2xl font-bold pt-4">{t('settings.title')}</Text>
         </View>
 
         {/* Theme Selector */}
         <View className="mb-4 flex flex-col gap-4">
-          <ThemedText className='text-2xl font-bold ml-2' style={styles.label}>{t('settings.theme')}</ThemedText>
+          <Text 
+            className='text-lg font-bold ml-2' 
+            style={styles.label}
+          >
+            {t('settings.theme')}
+          </Text>
           <View className="flex flex-row justify-evenly">
             {['dark', 'light', 'system'].map((option) => (
               <TouchableOpacity
@@ -80,9 +86,9 @@ export default function SettingsScreen() {
                 style={[
                   styles.option,
                   theme === option && styles.selectedOption,
-                  theme === 'dark' && option !== 'dark' && styles.disabledOption, // Disable non-dark options
+                  theme === 'dark' && option !== 'dark' && styles.disabledOption,
                 ]}
-                disabled={theme === 'dark' && option !== 'dark'} // Disable non-dark options when theme is dark
+                disabled={theme === 'dark' && option !== 'dark'}
               >
                 <Text style={styles.optionText}>{t(`settings.themeOptions.${option}`)}</Text>
               </TouchableOpacity>
@@ -92,7 +98,7 @@ export default function SettingsScreen() {
 
         {/* Currency Selector */}
         <View className="mb-4 flex flex-col gap-4">
-          <ThemedText className='text-2xl font-bold ml-2' style={styles.label}>{t('settings.currency')}</ThemedText>
+          <Text className='text-lg font-bold ml-2' style={styles.label}>{t('settings.currency')}</Text>
           <Picker
             selectedValue={currency}
             onValueChange={handleCurrencyChange}
@@ -106,7 +112,7 @@ export default function SettingsScreen() {
 
         {/* Language Selector */}
         <View className="mb-4 flex flex-col gap-4">
-          <ThemedText className='text-2xl font-bold ml-2' style={styles.label}>{t('settings.language')}</ThemedText>
+          <Text className='text-lg font-bold ml-2' style={styles.label}>{t('settings.language')}</Text>
           <Picker
             selectedValue={language}
             onValueChange={handleLanguageChange}
@@ -123,12 +129,6 @@ export default function SettingsScreen() {
 };
 
 const styles = StyleSheet.create({
-  sectionHeader: {
-    fontSize: 24,
-    color: '#FFF',
-    fontWeight: 'bold',
-    paddingTop: 16,
-  },
   label: {
     color: '#FFF',
   },
@@ -141,13 +141,13 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#ACACAC',
     borderRadius: 8,
-    marginHorizontal: 5,
+    marginHorizontal: 8,
   },
   selectedOption: {
     backgroundColor: '#F76D35',
   },
   disabledOption: {
-    backgroundColor: '#999', // Style for disabled options
+    backgroundColor: '#2A2A2A',
   },
   optionText: {
     color: '#FFF',
