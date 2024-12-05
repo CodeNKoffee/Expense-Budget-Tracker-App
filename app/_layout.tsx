@@ -1,6 +1,7 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
+import * as Localization from 'expo-localization';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -14,6 +15,8 @@ import { formatCurrency } from '@/utils';
 import { useColorScheme } from '../hooks/useColorScheme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Currency } from '@/types';
+import { I18nManager, Platform, StyleSheet, View } from 'react-native';
+import RNRestart from 'react-native-restart';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -32,6 +35,22 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+
+  useEffect(() => {
+    const isRTL = Localization.isRTL;
+
+    // Apply RTL layout direction if the language is RTL
+    if (isRTL !== I18nManager.isRTL) {
+      I18nManager.forceRTL(isRTL);
+      I18nManager.allowRTL(isRTL);
+      // Reload the app to apply the change
+      if (Platform.OS === 'android') {
+        RNRestart.Restart(); // Use 'react-native-restart' for Android
+      } else {
+        console.warn('Please reload the app to see RTL changes!');
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const loadCurrency = async () => {
@@ -57,13 +76,13 @@ export default function RootLayout() {
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
         <CurrencyContext.Provider value={{ currency, setCurrency }}>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-          <StatusBar style="auto" />
-        </ThemeProvider>
+          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <StatusBar style="auto" />
+          </ThemeProvider>
         </CurrencyContext.Provider>
       </I18nextProvider>
     </Provider>

@@ -1,50 +1,122 @@
-# Welcome to your Expo app 👋
+# Financial Freedom Companion: Personal Budget Maestro
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Project Overview
+A comprehensive personal budget tracking mobile application developed as part of a senior React Native developer job application at Foodics.
 
-## Get started
+## Features
 
-1. Install dependencies
+### Core Functionality
+- **Dashboard**
+  - Total income, expenses, and remaining balance visualization
+  - Expense categories chart (Pie Chart)
+  - 10 most recent transactions display
 
-   ```bash
-   npm install
-   ```
+- **Expense Breakdown**
+  - Pie chart of spending categories
+  - Stacked bar chart for income sources
+  - Financial insights and advice links
 
-2. Start the app
+- **Transaction Management**
+  - Manual transaction entry
+  - Flexible date and time logging
+  - Income and expense categorization
 
-   ```bash
-    npx expo start
-   ```
+- **Transaction History**
+  - Comprehensive transaction list
+  - Sorting capabilities
 
-In the output, you'll find options to open the app in a
+- **Settings**
+  - Theme customization
+  - Multi-language support
+  - Currency conversion
+  - Personal profile settings
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Bonus Features
+- Dark mode implementation
+- Input validation
+- Unit testing
+- Internationalization (i18n)
+- Multi-currency support
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Technical Stack
+- **Framework**: React Native (Expo SDK 52)
+- **Language**: TypeScript
+- **State Management**: Redux
+- **Styling**: Tailwind (Native Wind)
+- **Persistent Storage**: AsyncStorage
+- **API Integration**: Mock API (mockapi.io)
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+## Color Palette
+```javascript
+colors: {
+  "budget-midnight": "#000000",
+  "budget-charcoal": "#101010",
+  "budget-steel": "#2A2A2A",
+  "budget-silver": "#ACACAC",
+  "budget-cloud": "#F5F5F5",
+  "budget-snow": "#FEFEFE",
+  "budget-tangerine": "#F76D35",
+  "budget-expense": "#FF1919",
+  "budget-income": "#00B232"
+}
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Project Structure
+- `src/`
+  - `types/`: TypeScript type definitions
+  - `contexts/`: React contexts
+  - `utils/`: Utility functions
+  - `hooks/`: Custom React hooks
+  - `api/`: API service configurations
+  - `components/`: Reusable UI components
+  - `screens/`: Main application screens
 
-## Learn more
+## Development Approach
+- Modular design
+- Clean code practices
+- Chronological imports
+- Comprehensive commenting
+- Performance optimization
 
-To learn more about developing your project with Expo, look at the following resources:
+## Mission: Financial Clarity & Control
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+This Budget Tracker transforms complex financial data into actionable insights, empowering users to:
+- Decode personal spending patterns
+- Gain comprehensive financial understanding
+- Make informed monetary decisions
 
-## Join the community
+## Future Vision
+- Banking app integration
+- Advanced financial insights
+- Enhanced data visualization
+- AI-powered financial coaching
+- Global financial ecosystem connections
 
-Join our community of developers creating universal apps.
+## Prerequisites
+- Node.js
+- npm or Yarn
+- Expo CLI
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Installation
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+3. Start the application:
+   ```bash
+   npx expo start
+   ```
+
+## Testing
+- Unit tests for core functions
+- Component-level testing
+
+## License
+Private project developed for Foodics job application. Not for public distribution.
+
+---
+
+**Note**: This application was developed as a technical assessment for a senior React Native developer position.
