@@ -1,11 +1,13 @@
 # Financial Freedom Companion: Personal Budget Maestro
 
 ## Project Overview
+
 A comprehensive personal budget tracking mobile application developed as part of a senior React Native developer job application at Foodics.
 
 ## Features
 
 ### Core Functionality
+
 - **Dashboard**
   - Total income, expenses, and remaining balance visualization
   - Expense categories chart (Pie Chart)
@@ -32,6 +34,7 @@ A comprehensive personal budget tracking mobile application developed as part of
   - Personal profile settings
 
 ### Bonus Features
+
 - Dark mode implementation
 - Input validation
 - Unit testing
@@ -39,6 +42,7 @@ A comprehensive personal budget tracking mobile application developed as part of
 - Multi-currency support
 
 ## Technical Stack
+
 - **Framework**: React Native (Expo SDK 52)
 - **Language**: TypeScript
 - **State Management**: Redux
@@ -47,6 +51,7 @@ A comprehensive personal budget tracking mobile application developed as part of
 - **API Integration**: Mock API (mockapi.io)
 
 ## Color Palette
+
 ```javascript
 colors: {
   "budget-midnight": "#000000",
@@ -62,16 +67,30 @@ colors: {
 ```
 
 ## Project Structure
-- `src/`
-  - `types/`: TypeScript type definitions
-  - `contexts/`: React contexts
-  - `utils/`: Utility functions
-  - `hooks/`: Custom React hooks
-  - `api/`: API service configurations
-  - `components/`: Reusable UI components
-  - `screens/`: Main application screens
+
+- `app/`: Entry point & app screens
+- `types/`: TypeScript type definitions
+- `constants/`: Variables & dummy data
+- `utils/`: Utility functions
+- `hooks/`: Custom React hooks
+- `services/`: API service from MockAPI.io
+- `components/`: Reusable UI components
+- `redux/`: Frontend storage (e.g., state management)
+- `locales/`: Language files for i18n (internationalization)
+- `scripts/`: Custom scripts for development automation
+- `assets/`: Static assets like images, fonts, etc.
+- `.expo/`: Expo-specific project configuration
+- `.vscode/`: Editor settings and extensions
+- `.env`: Environment variables configuration
+- `app.json`: Expo configuration
+- `babel.config.js`: Babel configuration for the project
+- `metro.config.js`: Custom Metro bundler configuration
+- `tailwind.config.js`: Tailwind CSS configuration
+- `tsconfig.json`: TypeScript configuration file
+- `README.md`: Project documentation
 
 ## Development Approach
+
 - Modular design
 - Clean code practices
 - Chronological imports
@@ -81,11 +100,13 @@ colors: {
 ## Mission: Financial Clarity & Control
 
 This Budget Tracker transforms complex financial data into actionable insights, empowering users to:
+
 - Decode personal spending patterns
 - Gain comprehensive financial understanding
 - Make informed monetary decisions
 
 ## Future Vision
+
 - Banking app integration
 - Advanced financial insights
 - Enhanced data visualization
@@ -93,28 +114,38 @@ This Budget Tracker transforms complex financial data into actionable insights, 
 - Global financial ecosystem connections
 
 ## Prerequisites
+
 - Node.js
 - npm or Yarn
 - Expo CLI
+- Android Studio
+- Xcode Dev Tools
+- Visual Studio Code
 
 ## Installation
+
 1. Clone the repository
 2. Install dependencies:
+
    ```bash
    npm install
    # or
    yarn install
    ```
+
 3. Start the application:
+
    ```bash
    npx expo start
    ```
 
 ## Testing
+
 - Unit tests for core functions
 - Component-level testing
 
 ## License
+
 Private project developed for Foodics job application. Not for public distribution.
 
 ---
