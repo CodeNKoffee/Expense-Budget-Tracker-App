@@ -45,8 +45,8 @@ export default function HomeScreen() {
     });
   }, [dispatch]);
 
-  const totalIncome = calculateTotalIncome(transactions);
-  const totalExpenses = calculateTotalExpenses(transactions);
+  const totalIncome = 10000;
+  const totalExpenses = 2000;
   const remainingBalance = totalIncome - totalExpenses;
 
   const handleSave = async () => {
@@ -64,63 +64,66 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView className='flex-1 bg-budget-charcoal'>
-      {loading ? (
-        <SplashScreen />
-      ) : (
-        <ScrollView className='px-8 py-4 flex flex-col'>
-          {/* Header */}
-          <View className='mb-12 items-center'>
-            <Text className="text-2xl font-bold text-white">{t(getGreeting())} {userName} 💸</Text>
-          </View>
+    <SafeAreaView className="flex-1 bg-budget-charcoal">
+      <ScrollView className="px-8 py-4 flex flex-col" contentContainerStyle={{ paddingBottom: 20 }}>
+        {/* Header */}
+        <View className="mb-8 items-center">
+          <Text className="text-2xl font-bold text-white">
+            {t(getGreeting())} {userName} 💸
+          </Text>
+        </View>
+        {loading ? (
+          <SplashScreen />
+        ) : (
+          <>
+            {/* Edit Icon with Hover Effect */}
+            <TouchableOpacity
+              className="absolute bottom-2 right-0 bg-budget-steel p-3 rounded-full z-10"
+              onPress={() => setModalVisible(true)}
+            >
+              <Text className="text-3xl text-orange-500">✏️</Text>
+            </TouchableOpacity>
 
-          {/* Edit Icon with Hover Effect */}
-          <TouchableOpacity
-            className="absolute -bottom-4 right-0 bg-budget-steel p-3 rounded-full z-10"
-            onPress={() => setModalVisible(true)}
-          >
-            <Text className="text-3xl text-orange-500">✏️</Text>
-          </TouchableOpacity>
-
-          {/* Financial Stats */}
-          <View className='flex flex-row justify-between mb-12'>
-            <View className='flex-1 items-center'>
-              <Text className="text-sm text-gray-400 mb-1">{t('home.totalIncome')}</Text>
-              <Text className="text-xl font-bold text-white">{formatCurrency(totalIncome, currency)}</Text>
+            {/* Financial Stats */}
+            <View className='flex flex-col justify-between mb-8'>
+              <View className='w-full flex-1 flex-row justify-between items-center'>
+                <Text className="text-md text-budget-silver mb-1">{t('home.totalIncome')}</Text>
+                <Text className="text-xl font-bold text-white">{formatCurrency(totalIncome, currency)}</Text>
+              </View>
+              <View className='w-full flex-1 flex-row justify-between items-center'>
+                <Text className="text-md text-budget-silver mb-1">{t('home.totalExpenses')}</Text>
+                <Text className="text-xl font-bold text-white">{formatCurrency(totalExpenses, currency)}</Text>
+              </View>
+              <View className='w-full flex-1 flex-row justify-between items-center'>
+                <Text className="text-md text-budget-silver mb-1">{t('home.remainingBalance')}</Text>
+                <Text className="text-xl font-bold text-white">{formatCurrency(remainingBalance, currency)}</Text>
+              </View>
             </View>
-            <View className='flex-1 items-center'>
-              <Text className="text-sm text-gray-400 mb-1">{t('home.totalExpenses')}</Text>
-              <Text className="text-xl font-bold text-white">{formatCurrency(totalExpenses, currency)}</Text>
-            </View>
-            <View className='flex-1 items-center'>
-              <Text className="text-sm text-gray-400 mb-1">{t('home.remainingBalance')}</Text>
-              <Text className="text-xl font-bold text-white">{formatCurrency(remainingBalance, currency)}</Text>
-            </View>
-          </View>
 
-          {/* Line Chart */}
-          <View className='mb-10'>
-            <Text className="text-lg font-semibold text-white mb-3">{t('home.spendingOverTime')}</Text>
-            <LineChart
-              data={{
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [
-                  {
-                    data: [100, 200, 150, 300, 250, 400],
-                  },
-                ],
-              }}
-              width={screenWidth - 40}
-              height={200}
-              chartConfig={chartConfig}
-              bezier
-            />
-          </View>
+            {/* Line Chart */}
+            <View className='mb-10'>
+              <Text className="text-lg font-semibold text-white mb-3">{t('home.spendingOverTime')}</Text>
+              <LineChart
+                data={{
+                  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                  datasets: [
+                    {
+                      data: [100, 200, 150, 300, 250, 400],
+                    },
+                  ],
+                }}
+                width={screenWidth - 40}
+                height={200}
+                chartConfig={chartConfig}
+                bezier
+              />
+            </View>
 
-          {/* Recent Transactions List */}
-          <RecentTransactions />
-        </ScrollView>
-      )}
+            {/* Recent Transactions List */}
+            <RecentTransactions />
+          </>
+        )}
+      </ScrollView>
 
       {/* Modal for Editing Name */}
       <Modal

@@ -20,7 +20,7 @@ const expenseData = [
 
 const barData = {
   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-  legend: ['Rent', 'Groceries', 'Utilities'],
+  legend: ['Foodics', 'Udacity', 'Timedoor'],
   data: [
     [800, 300, 150],
     [700, 200, 100],

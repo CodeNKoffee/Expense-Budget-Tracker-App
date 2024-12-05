@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 20,
     right: 20,
-    borderRadius: 25,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
     backgroundColor: '#000',
     height: 70,
     justifyContent: 'center',
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   androidElevation: {
-    elevation: 5,
+    elevation: 50,
   },
 });
 
