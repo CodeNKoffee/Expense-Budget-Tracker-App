@@ -13,6 +13,7 @@ import TransactionList from './shared/TransactionList';
 export default function RecentTransactions() {
   const transactions = useSelector((state: RootState) => state.transactions.transactions);
   const { t } = useTranslation();
+  const isRTL = I18nManager.isRTL;
   const { currency } = useCurrency();
 
   return (
@@ -20,11 +21,13 @@ export default function RecentTransactions() {
       className="rounded-3xl bg-budget-snow px-6 py-4 flex flex-col" 
       style={{ height: 250 }}
     >
-      <Text
-        className={`text-lg font-bold text-budget-silver pb-2 ${I18nManager.isRTL ? 'items-start' : 'items-end'}`}
-      >
-        {t('home.recentTransactions')}
-      </Text>
+      <View className={`w-full flex ${isRTL ? 'items-start' : 'items-end'}`}>
+        <Text
+          className={`text-lg font-bold text-budget-silver pb-2`}
+        >
+          {t('home.recentTransactions')}
+        </Text>
+      </View>
       <TransactionList transactions={transactions} maxItems={10} whiteBG />
     </View>
   );

@@ -87,7 +87,7 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <I18nextProvider i18n={i18n}>
+      
         <CurrencyContext.Provider value={{ currency, setCurrency }}>
           <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
             <Stack>
@@ -97,7 +97,6 @@ export default function RootLayout() {
             <StatusBar style="auto" />
           </ThemeProvider>
         </CurrencyContext.Provider>
-      </I18nextProvider>
     </Provider>
   );
 }

@@ -1,7 +1,7 @@
 // React and React hooks
 import React, { useEffect, useState } from 'react';
 // Third-party libraries
-import { ScrollView, View, Dimensions, SafeAreaView, Text, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { ScrollView, View, Dimensions, SafeAreaView, Text, TouchableOpacity, Modal, TextInput, I18nManager } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
 import { LineChart } from 'react-native-chart-kit';
@@ -20,6 +20,7 @@ import { aggregateExpensesByMonth } from '@/utils';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
+  const isRTL = I18nManager.isRTL;
   const dispatch = useAppDispatch();
   const screenWidth = Dimensions.get('window').width;
   const { currency } = useCurrency();
@@ -91,15 +92,15 @@ export default function HomeScreen() {
 
             {/* Financial Stats */}
             <View className='flex flex-col justify-between mb-8'>
-              <View className='w-full flex-1 flex-row justify-between items-center'>
+              <View className={`w-full flex-1 ${isRTL ? 'flex-row' : 'flex-row-reverse'} justify-between items-center`}>
                 <Text className="text-md text-budget-silver mb-1">{t('home.totalIncome')}</Text>
                 <Text className="text-xl font-bold text-white">{formatCurrency(totalIncome, currency)}</Text>
               </View>
-              <View className='w-full flex-1 flex-row justify-between items-center'>
+              <View className={`w-full flex-1 ${isRTL ? 'flex-row' : 'flex-row-reverse'} justify-between items-center`}>
                 <Text className="text-md text-budget-silver mb-1">{t('home.totalExpenses')}</Text>
                 <Text className="text-xl font-bold text-white">{formatCurrency(totalExpenses, currency)}</Text>
               </View>
-              <View className='w-full flex-1 flex-row justify-between items-center'>
+              <View className={`w-full flex-1 ${isRTL ? 'flex-row' : 'flex-row-reverse'} justify-between items-center`}>
                 <Text className="text-md text-budget-silver mb-1">{t('home.remainingBalance')}</Text>
                 <Text className="text-xl font-bold text-white">{formatCurrency(remainingBalance, currency)}</Text>
               </View>
