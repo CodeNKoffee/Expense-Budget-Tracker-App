@@ -34,8 +34,10 @@ export default function SettingsScreen() {
   };
 
   const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
-    setTheme(newTheme);
-    saveSetting('theme', newTheme);
+    if (theme !== 'dark') {
+      setTheme(newTheme);
+      saveSetting('theme', newTheme);
+    }
   };
 
   // Use useEffect for currency update
@@ -48,7 +50,7 @@ export default function SettingsScreen() {
     if (currency) {
       updateCurrency();
     }
-  }, [currency]); // This effect runs whenever currency changes
+  }, [currency]);
 
   const handleCurrencyChange = (newCurrency: string) => {
     setCurrency(newCurrency);
@@ -78,7 +80,9 @@ export default function SettingsScreen() {
                 style={[
                   styles.option,
                   theme === option && styles.selectedOption,
+                  theme === 'dark' && option !== 'dark' && styles.disabledOption, // Disable non-dark options
                 ]}
+                disabled={theme === 'dark' && option !== 'dark'} // Disable non-dark options when theme is dark
               >
                 <Text style={styles.optionText}>{t(`settings.themeOptions.${option}`)}</Text>
               </TouchableOpacity>
@@ -141,6 +145,9 @@ const styles = StyleSheet.create({
   },
   selectedOption: {
     backgroundColor: '#F76D35',
+  },
+  disabledOption: {
+    backgroundColor: '#999', // Style for disabled options
   },
   optionText: {
     color: '#FFF',
