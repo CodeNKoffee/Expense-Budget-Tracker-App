@@ -6,9 +6,10 @@ import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 // Utilities and hooks
-import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
 import { addTransaction } from '@/redux/transactionsSlice';
 import { Transaction } from '@/types';
+import { v4 as uuidv4 } from 'uuid';
 
 const dateFormat = new Intl.DateTimeFormat('en-US', {
   weekday: 'short',
@@ -70,12 +71,16 @@ export default function TransactionForm() {
       amount: parseFloat(values.amount),
       type: transactionType, // Use the state variable instead of values.type
       date: transactionDate,
+      id: uuidv4(),
     };
 
     // Log the transaction before dispatching
     console.log('Attempting to add transaction:', newTransaction);
   
     dispatch(addTransaction(newTransaction));
+
+    // Log the updated transactions state 
+    // console.log('Updated transactions state:', useAppSelector((state) => state.transactions.transactions));
     
     // Reset form and show success message
     resetForm();

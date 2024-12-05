@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { useTranslation } from 'react-i18next';
 
-export default function SplashScreen() {
+export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
 

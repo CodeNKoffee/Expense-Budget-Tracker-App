@@ -15,6 +15,7 @@ import RecentTransactions from '@/components/RecentTransactions';
 import SplashScreen from '@/components/shared/LoadingScreen';
 import { lineChartConfig } from '@/constants';
 import { StatusBar } from 'expo-status-bar';
+import LoadingScreen from '@/components/shared/LoadingScreen';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -72,7 +73,7 @@ export default function HomeScreen() {
         </View>
 
         {loading ? (
-          <SplashScreen />
+          <LoadingScreen />
         ) : (
           <>
             <TouchableOpacity

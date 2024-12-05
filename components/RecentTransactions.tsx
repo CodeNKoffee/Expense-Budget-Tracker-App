@@ -1,5 +1,5 @@
 // React and React hooks
-import React from 'react';
+import React, { useEffect } from 'react';
 // Third-party libraries
 import { Text, ScrollView, View, I18nManager } from "react-native";
 import { useSelector } from 'react-redux';

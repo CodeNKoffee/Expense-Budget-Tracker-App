@@ -11,6 +11,7 @@ import { useCurrency } from "../_layout";
 // Components
 import SplashScreen from "@/components/shared/LoadingScreen";
 import TransactionList from "@/components/shared/TransactionList";
+import LoadingScreen from "@/components/shared/LoadingScreen";
 
 export default function HistoryScreen() {
   const dispatch = useAppDispatch();
@@ -19,6 +20,11 @@ export default function HistoryScreen() {
   const { currency } = useCurrency();
 
   const [loading, setLoading] = useState<boolean>(true);
+
+  // Log transactions whenever they change
+  useEffect(() => {
+    console.log('Recent Transactions updated:', transactions);
+  }, [transactions]);
 
   useEffect(() => {
     dispatch(fetchTransactions())
@@ -40,7 +46,7 @@ export default function HistoryScreen() {
         </View>
 
         {loading ? (
-          <SplashScreen />
+          <LoadingScreen />
         ) : (
           <TransactionList transactions={transactions} />
         )}

@@ -12,6 +12,7 @@ import { barData, chartConfig, expenseData } from '@/constants';
 // Components
 import SplashScreen from '@/components/shared/LoadingScreen';
 import { ExternalLink } from '@/components/ExternalLink';
+import LoadingScreen from '@/components/shared/LoadingScreen';
 
 export default function BreakdownScreen() {
   const { t } = useTranslation();
@@ -42,7 +43,7 @@ export default function BreakdownScreen() {
         </View>
 
         {loading ? (
-          <SplashScreen />
+          <LoadingScreen />
         ) : (
           <>
             {/* Pie Chart */}
