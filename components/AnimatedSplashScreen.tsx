@@ -1,8 +1,6 @@
 import React from 'react';
-import { 
-  View,
-  Text, 
-  StyleSheet, 
+import {
+  View, StyleSheet
 } from 'react-native';
 import LottieView from 'lottie-react-native';
 import Logo from '@/assets/images/splash.json';
@@ -19,7 +17,6 @@ export default function SplashScreen() {
     </View>
   )
 }
-
 
 const styles = StyleSheet.create({
   animatedLogo: {

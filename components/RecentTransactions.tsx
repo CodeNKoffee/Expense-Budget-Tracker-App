@@ -1,13 +1,11 @@
 // React and React hooks
-import React, { useEffect } from 'react';
+import React from 'react';
 // Third-party libraries
-import { Text, ScrollView, View, I18nManager } from "react-native";
+import { Text, View } from "react-native";
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 // Utilities and hooks
 import { RootState } from '@/redux/store';
-import { formatCurrency } from '@/utils';
-import { useCurrency } from '@/app/_layout';
 import TransactionList from './shared/TransactionList';
 
 export default function RecentTransactions() {

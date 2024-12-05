@@ -1,12 +1,12 @@
 // React and React hooks
 import React, { useState } from 'react';
 // Third-party libraries
-import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView, I18nManager } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView } from 'react-native';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 // Utilities and hooks
-import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { addTransaction } from '@/redux/transactionsSlice';
 import { Transaction } from '@/types';
 import { v4 as uuidv4 } from 'uuid';

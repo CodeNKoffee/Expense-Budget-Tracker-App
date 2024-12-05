@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, View, Text, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 // Utilities and hooks
-import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
-import { formatCurrency } from "@/utils";
+import { useAppSelector } from "@/hooks/useAppDispatch";
 import { useCurrency } from "../_layout";
 // Components
 import TransactionList from "@/components/shared/TransactionList";

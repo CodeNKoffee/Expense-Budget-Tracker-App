@@ -1,6 +1,5 @@
 // Home Screen
 
-import { Currency } from "@/types";
 
 // Data for LineChart
 export const lineChartConfig = {

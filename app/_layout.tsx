@@ -9,8 +9,6 @@ import 'react-native-reanimated';
 import '../global.css';
 import { Provider } from 'react-redux';
 import store from '@/redux/store';
-import { I18nextProvider } from 'react-i18next';
-import i18n from '@/localization';
 import { useColorScheme } from '../hooks/useColorScheme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Currency } from '@/types';
