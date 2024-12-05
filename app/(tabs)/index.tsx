@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { formatCurrency } from '@/utils';
 import { useCurrency } from '../_layout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from '@/components/shared/SplashScreen';
 
 const chartConfig = {
   backgroundGradientFrom: '#101010',
@@ -65,7 +66,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className='flex-1 bg-budget-charcoal'>
       {loading ? (
-        <Text className="text-center text-budget-snow text-2xl font-bold">{t('loading')}</Text>
+        <SplashScreen />
       ) : (
         <ScrollView className='px-8 py-4 flex flex-col'>
           {/* Header */}

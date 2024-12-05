@@ -6,6 +6,7 @@ import { ThemedText } from "../../components/shared/ThemedText";
 import { useTranslation } from "react-i18next";
 import { formatCurrency } from "@/utils";
 import { useCurrency } from "../_layout";
+import SplashScreen from "@/components/shared/SplashScreen";
 
 export default function HistoryScreen() {
   const dispatch = useAppDispatch();
@@ -35,7 +36,7 @@ export default function HistoryScreen() {
         </View>
 
         {loading ? (
-          <Text className="text-center text-white">{t("loading")}</Text>
+          <SplashScreen />
         ) : (
           transactions.map((transaction, index) => {
             // Flip the logic every 7 transactions

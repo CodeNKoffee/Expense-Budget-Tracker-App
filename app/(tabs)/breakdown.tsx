@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Dimensions, StyleSheet, View, I18nManager } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { ThemedText } from '../../components/shared/ThemedText';
 import { ExternalLink } from '../../components/ExternalLink';
 import { useTranslation } from 'react-i18next';
+import SplashScreen from '@/components/shared/SplashScreen';
+import { fetchTransactions } from '@/redux/transactionsSlice';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
 
 // Data for PieChart and BarChart
 const expenseData = [
@@ -45,6 +48,18 @@ const chartConfig = {
 export default function BreakdownScreen() {
   const screenWidth = Dimensions.get('window').width;
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(fetchTransactions())
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, [dispatch]);
 
   return (
     <SafeAreaView className="flex-1 bg-budget-charcoal">
@@ -55,59 +70,65 @@ export default function BreakdownScreen() {
           </ThemedText>
         </View>
 
-        {/* Pie Chart */}
-        <View className="mb-12">
-          <PieChart
-            data={expenseData.map((item) => ({
-              name: item.name,
-              population: item.amount,
-              color: item.color,
-              legendFontColor: '#FFF',
-              legendFontSize: 12,
-            }))}
-            width={screenWidth - 40}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="population"
-            backgroundColor="transparent"
-            paddingLeft="15"
-          />
-        </View>
+        {loading ? (
+          <SplashScreen />
+        ) : (
+          <>
+            {/* Pie Chart */}
+            <View className="mb-12">
+              <PieChart
+                data={expenseData.map((item) => ({
+                  name: item.name,
+                  population: item.amount,
+                  color: item.color,
+                  legendFontColor: '#FFF',
+                  legendFontSize: 12,
+                }))}
+                width={screenWidth - 40}
+                height={220}
+                chartConfig={chartConfig}
+                accessor="population"
+                backgroundColor="transparent"
+                paddingLeft="15"
+              />
+            </View>
 
-        {/* Bar Chart */}
-        <View className="mb-12">
-          <ThemedText style={styles.chartTitle}>{t('breakdown.spendingOverPastSixMonths')}</ThemedText>
-          <StackedBarChart
-            data={barData}
-            width={screenWidth - 80}
-            height={180}
-            chartConfig={chartConfig}
-            hideLegend={true}
-            style={{
-              marginHorizontal: 10,
-            }}
-          />
-          {/* Custom Legend */}
-          <View className='mt-4 flex flex-row justify-center flex-wrap'>
-            {barData.legend.map((label, index) => (
-              <View key={index} className='mr-4 mb-2 flex flex-row items-center'>
-                <View className='w-4 h-4 mr-4 rounded-md' style={{ backgroundColor: barData.barColors[index] }} />
-                <ThemedText style={styles.legendText}>{label}</ThemedText>
+            {/* Bar Chart */}
+            <View className="mb-12">
+              <ThemedText style={styles.chartTitle}>{t('breakdown.spendingOverPastSixMonths')}</ThemedText>
+              <StackedBarChart
+                data={barData}
+                width={screenWidth - 80}
+                height={180}
+                chartConfig={chartConfig}
+                hideLegend={true}
+                style={{
+                  marginHorizontal: 10,
+                }}
+              />
+              {/* Custom Legend */}
+              <View className='mt-4 flex flex-row justify-center flex-wrap'>
+                {barData.legend.map((label, index) => (
+                  <View key={index} className='mr-4 mb-2 flex flex-row items-center'>
+                    <View className='w-4 h-4 mr-4 rounded-md' style={{ backgroundColor: barData.barColors[index] }} />
+                    <ThemedText style={styles.legendText}>{label}</ThemedText>
+                  </View>
+                ))}
               </View>
-            ))}
-          </View>
-        </View>
+            </View>
 
-        {/* Additional Analysis */}
-        <View>
-          <ThemedText style={styles.subHeader}>{t('breakdown.otherInsights')}</ThemedText>
-          <ExternalLink
-            style={styles.insightText}
-            href="https://hatemsoliman.dev"
-          >
-            {t('breakdown.insightsLink')}
-          </ExternalLink>
-        </View>
+            {/* Additional Analysis */}
+            <View>
+              <ThemedText style={styles.subHeader}>{t('breakdown.otherInsights')}</ThemedText>
+              <ExternalLink
+                style={styles.insightText}
+                href="https://hatemsoliman.dev"
+              >
+                {t('breakdown.insightsLink')}
+              </ExternalLink>
+            </View>
+          </>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
