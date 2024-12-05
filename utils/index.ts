@@ -41,16 +41,28 @@ export const formatCurrency = (amount: number, currency: string): string => {
   return formatter.format(amount);
 };
 
-export const aggregateExpensesByMonth = (transactions: Transaction[]): { [key: string]: number } => {
+export const getPastSixMonthsLabels = () => {
+  const labels = [];
+  for (let i = 5; i >= 0; i--) {
+    labels.push(moment().subtract(i, 'months').format('MMM')); // Format as month name only
+  }
+  return labels;
+};
+
+export const aggregateExpensesByMonth = (transactions: Transaction[], labels: string[]) => {
   const expensesByMonth: { [key: string]: number } = {};
+
+  labels.forEach(label => {
+    expensesByMonth[label] = 0;
+  });
 
   transactions.forEach(transaction => {
     if (transaction.type === 'expense') {
       const month = moment(transaction.date, 'ddd, MMM D • h:mm A').format('MMM YYYY');
-      if (!expensesByMonth[month]) {
-        expensesByMonth[month] = 0;
+      const shortMonth = moment(transaction.date, 'ddd, MMM D • h:mm A').format('MMM'); // Get short month name
+      if (expensesByMonth[shortMonth] !== undefined) {
+        expensesByMonth[shortMonth] += transaction.amount;
       }
-      expensesByMonth[month] += transaction.amount;
     }
   });
 

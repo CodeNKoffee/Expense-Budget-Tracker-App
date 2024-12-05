@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
 import { LineChart } from 'react-native-chart-kit';
 // Utilities and hooks
-import { getGreeting, formatCurrency, calculateTotalIncome, calculateTotalExpenses } from '@/utils';
+import { getGreeting, formatCurrency, calculateTotalIncome, calculateTotalExpenses, getPastSixMonthsLabels } from '@/utils';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
 import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useCurrency } from '../_layout';
@@ -45,9 +45,10 @@ export default function HomeScreen() {
   const totalExpenses = calculateTotalExpenses(transactions);
   const remainingBalance = totalIncome - totalExpenses;
 
-  const aggregatedExpenses = aggregateExpensesByMonth(transactions); 
-  const chartLabels = Object.keys(aggregatedExpenses); 
-  const chartData = Object.values(aggregatedExpenses);
+  const pastSixMonthsLabels = getPastSixMonthsLabels(); 
+  const aggregatedExpenses = aggregateExpensesByMonth(transactions, pastSixMonthsLabels); 
+  const chartLabels = pastSixMonthsLabels; 
+  const chartData = pastSixMonthsLabels.map(label => aggregatedExpenses[label]);
 
   const handleSave = async () => {
     try {
