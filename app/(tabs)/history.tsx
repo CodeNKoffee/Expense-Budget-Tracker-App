@@ -1,11 +1,14 @@
+// React and React hooks
 import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View, Text, SafeAreaView } from "react-native";
+// Third-party libraries
+import { ScrollView, View, Text, SafeAreaView } from "react-native";
+import { useTranslation } from "react-i18next";
+// Utilities and hooks
 import { useAppDispatch, useAppSelector } from "@/hooks/useAppDispatch";
 import { fetchTransactions } from "@/redux/transactionsSlice";
-import { ThemedText } from "../../components/shared/ThemedText";
-import { useTranslation } from "react-i18next";
 import { formatCurrency } from "@/utils";
 import { useCurrency } from "../_layout";
+// Components
 import SplashScreen from "@/components/shared/SplashScreen";
 
 export default function HistoryScreen() {
@@ -14,7 +17,7 @@ export default function HistoryScreen() {
   const { t } = useTranslation();
   const { currency } = useCurrency();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     dispatch(fetchTransactions())
@@ -27,19 +30,19 @@ export default function HistoryScreen() {
   }, [dispatch]);
 
   return (
-    <SafeAreaView className="flex-1 bg-budget-charcoal">
+    <SafeAreaView className="bg-budget-charcoal flex-1">
       <ScrollView className="px-8 py-4">
         <View className="mb-8 items-center">
-          <ThemedText style={styles.sectionHeader}>
+          <Text className="text-white text-2xl font-bold pt-4">
             {t("history.transactionHistory")}
-          </ThemedText>
+          </Text>
         </View>
 
         {loading ? (
           <SplashScreen />
         ) : (
           transactions.map((transaction, index) => {
-            // Flip the logic every 7 transactions
+            // Flip the logic every 3 transactions
             const useAlternateLogic = Math.floor(index / 3) % 2 === 1;
 
             return (
@@ -75,12 +78,3 @@ export default function HistoryScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionHeader: {
-    fontSize: 24,
-    color: "#FFF",
-    fontWeight: "bold",
-    paddingTop: 16,
-  },
-});
