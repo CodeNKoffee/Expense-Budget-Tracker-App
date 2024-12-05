@@ -32,7 +32,11 @@ export default function TransactionList({ transactions, maxItems, whiteBG }: Tra
             </View>
             <Text
               className={`${
-                useAlternateLogic
+                transaction.type === 'income'
+                  ? "text-budget-income"
+                  : transaction.type === 'expense'
+                  ? "text-budget-expense"
+                  : useAlternateLogic
                   ? !transaction.type
                     ? "text-budget-income"
                     : "text-budget-expense"
