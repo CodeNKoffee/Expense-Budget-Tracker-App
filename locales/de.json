@@ -66,6 +66,8 @@
       "fr": "Französisch",
       "de": "Deutsch",
       "ru": "Russisch"
-    }
+    },
+    "savedMessage": "Ihre Einstellungen wurden gespeichert! Bitte aktualisieren Sie die App, um die Änderungen zu sehen.",
+    "refreshedMessage": "Einstellungen wurden aktualisiert!"
   }
 }

@@ -66,6 +66,8 @@
       "fr": "Français",
       "de": "Allemand",
       "ru": "Russe"
-    }
+    },
+    "savedMessage": "Vos paramètres ont été enregistrés ! Veuillez rafraîchir l'application pour voir les changements.",
+    "refreshedMessage": "Les paramètres ont été actualisés !"
   }
 }

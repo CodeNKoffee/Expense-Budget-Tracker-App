@@ -66,6 +66,8 @@
       "fr": "French",
       "de": "German",
       "ru": "Russian"
-    }
+    },
+    "savedMessage": "Your settings have been saved! Please refresh the app to see reflected changes.", 
+    "refreshedMessage": "Settings have been refreshed!"
   }
 }
