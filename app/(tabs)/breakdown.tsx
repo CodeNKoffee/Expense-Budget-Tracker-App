@@ -1,21 +1,23 @@
 // React and React hooks
 import React, { useEffect, useState } from 'react';
+
 // Third-party libraries
-import { ScrollView, Dimensions, View, Text, I18nManager } from 'react-native';
+import { ScrollView, Dimensions, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { useTranslation } from 'react-i18next';
+
 // Utilities and hooks
 import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { barData, chartConfig, expenseData } from '@/constants';
+
 // Components
 import { ExternalLink } from '@/components/ExternalLink';
 import LoadingScreen from '@/components/shared/LoadingScreen';
 
 export default function BreakdownScreen() {
   const { t } = useTranslation();
-  const isRTL = I18nManager.isRTL;
   const dispatch = useAppDispatch();
   const screenWidth = Dimensions.get('window').width;
   const [loading, setLoading] = useState<boolean>(true);
