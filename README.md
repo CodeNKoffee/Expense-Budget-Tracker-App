@@ -68,6 +68,8 @@ colors: {
 
 ## Project Structure
 
+- `__mocks__`: Mock implementations for testing
+- `__tests__`: Test files and test suites
 - `app/`: Entry point & app screens
 - `types/`: TypeScript type definitions
 - `constants/`: Variables & dummy data
@@ -82,6 +84,9 @@ colors: {
 - `.expo/`: Expo-specific project configuration
 - `.vscode/`: Editor settings and extensions
 - `.env`: Environment variables configuration
+- `.eslintrc`: Airbnb's ESLint configuration file
+- `jest.config.js`: Jest configuration file
+- `jest.setup.js`: Jest setup file for configuring the testing environment
 - `app.json`: Expo configuration
 - `babel.config.js`: Babel configuration for the project
 - `metro.config.js`: Custom Metro bundler configuration
@@ -107,8 +112,9 @@ This Budget Tracker transforms complex financial data into actionable insights, 
 
 ## Future Vision
 
-- Banking app integration
+- Banking & Fin-tech app integration
 - Advanced financial insights
+- Sending payments directly in-house
 - Enhanced data visualization
 - AI-powered financial coaching
 - Global financial ecosystem connections
