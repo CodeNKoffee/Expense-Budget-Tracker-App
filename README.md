@@ -186,6 +186,8 @@ Private project developed for Foodics job application. Not for public distributi
 
 ![Preview 15](assets/preview/15.png)
 
+![Preview 16](assets/preview/16.png)
+
 ---
 
 **Note**: This application was developed as a technical assessment for a senior React Native developer position.
