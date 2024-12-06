@@ -1,4 +1,4 @@
 module.exports = {
-  OS: 'ios', // or 'android' if needed
+  OS: 'ios', // Or 'android', depending on the test
   select: jest.fn().mockImplementation((platforms) => platforms.ios),
 };
