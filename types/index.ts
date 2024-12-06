@@ -53,6 +53,7 @@ export type TransactionListProps = {
   transactions: Transaction[];
   maxItems?: number;
   whiteBG?: boolean;
+  listPaddingBottom?: number;
 };
 
 // Union type of all the elements in the supportCurrencies array

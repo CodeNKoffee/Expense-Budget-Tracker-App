@@ -4,7 +4,7 @@ import { formatCurrency } from "@/utils";
 import { useCurrency } from "@/app/_layout";
 import { TransactionListProps } from "@/types";
 
-export default function TransactionList({ transactions, maxItems, whiteBG }: TransactionListProps) {
+export default function TransactionList({ transactions, maxItems, whiteBG, listPaddingBottom }: TransactionListProps) {
   const { currency } = useCurrency();
 
   // Determine how many transactions to slice
@@ -16,7 +16,7 @@ export default function TransactionList({ transactions, maxItems, whiteBG }: Tra
   return (
     <ScrollView
       contentContainerStyle={{ 
-        paddingBottom: 50,
+        paddingBottom: listPaddingBottom || 0,
         flexGrow: 1
       }}
     >

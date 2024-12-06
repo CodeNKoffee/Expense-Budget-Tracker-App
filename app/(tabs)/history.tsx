@@ -31,7 +31,7 @@ export default function HistoryScreen() {
         {loading ? (
           <LoadingScreen />
         ) : (
-          <TransactionList transactions={transactions} />
+          <TransactionList transactions={transactions} listPaddingBottom={50} />
         )}
       </ScrollView>
     </SafeAreaView>
