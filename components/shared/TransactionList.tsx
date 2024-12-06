@@ -1,5 +1,4 @@
-// TransactionList.tsx
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import { formatCurrency } from "@/utils";
 import { useCurrency } from "@/app/_layout";
