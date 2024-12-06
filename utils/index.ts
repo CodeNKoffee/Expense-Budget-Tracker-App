@@ -2,6 +2,7 @@ import i18n from "@/localization";
 import { Transaction } from "@/types";
 import moment from 'moment';
 
+// Get a greeting message based on the current time
 export function getGreeting(): string {
   const hours = new Date().getHours();
   if (hours < 12) return 'home.goodMorning';
@@ -9,18 +10,21 @@ export function getGreeting(): string {
   return 'home.goodEvening';
 }
 
+// Calculate the total expenses from a list of transactions
 export const calculateTotalExpenses = (transactions: Transaction[]): number => {
   return transactions
     .filter(t => t.type === 'expense')
     .reduce((total, transaction) => total + transaction.amount, 0);
 };
 
+// Calculate the total income from a list of transactions
 export const calculateTotalIncome = (transactions: Transaction[]): number => {
   return transactions
     .filter(t => t.type === 'income')
     .reduce((total, transaction) => total + transaction.amount, 0);
 };
 
+// Get categories by type from a list of transactions
 export const getcategorysByType = (transactions: Transaction[]) => {
   return transactions
     .filter(t => t.type === 'expense' && t.category)
@@ -32,6 +36,7 @@ export const getcategorysByType = (transactions: Transaction[]) => {
     }, {} as Record<string, number>);
 };
 
+// Format a number as currency based on the current locale
 export const formatCurrency = (amount: number, currency: string): string => {
   const locale = i18n.language; // Get the current language/locale from i18n
   const formatter = new Intl.NumberFormat(locale, {
@@ -41,6 +46,7 @@ export const formatCurrency = (amount: number, currency: string): string => {
   return formatter.format(amount);
 };
 
+// Get labels for the past six months
 export const getPastSixMonthsLabels = () => {
   const labels = [];
   for (let i = 5; i >= 0; i--) {
@@ -49,6 +55,7 @@ export const getPastSixMonthsLabels = () => {
   return labels;
 };
 
+// Aggregate expenses by month from a list of transactions
 export const aggregateExpensesByMonth = (transactions: Transaction[], labels: string[]) => {
   const expensesByMonth: { [key: string]: number } = {};
 
