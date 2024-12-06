@@ -1,6 +1,4 @@
-import {
-  createContext, useContext, useEffect, useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import 'react-native-reanimated';
 import 'react-native-get-random-values';
