@@ -1,16 +1,19 @@
 // React and React hooks
 import React, { useState } from 'react';
+
 // Third-party libraries
 import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView } from 'react-native';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+
 // Utilities and hooks
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { addTransaction } from '@/redux/transactionsSlice';
 import { Transaction } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 
+// Date format for transaction date
 const dateFormat = new Intl.DateTimeFormat('en-US', {
   weekday: 'short',
   month: 'short',
@@ -20,6 +23,7 @@ const dateFormat = new Intl.DateTimeFormat('en-US', {
   hour12: true,
 }).format;
 
+// Add validation schema for the form
 const validationSchema = Yup.object({
   merchant: Yup.string().required('Merchant is required'),
   category: Yup.string().required('Category is required'),
@@ -46,6 +50,7 @@ export default function TransactionForm() {
   const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
 
   const handleAddTransaction = (
+    // Add type for values and resetForm
     values: {
       merchant: string;
       category: string;
@@ -61,6 +66,7 @@ export default function TransactionForm() {
       type: string;
     }>
   ) => {
+    // Use the state variable instead of values.type
     const transactionDate = useCurrentTime
       ? values.date
       : dateFormat(new Date());
@@ -79,9 +85,6 @@ export default function TransactionForm() {
   
     dispatch(addTransaction(newTransaction));
 
-    // Log the updated transactions state 
-    // console.log('Updated transactions state:', useAppSelector((state) => state.transactions.transactions));
-    
     // Reset form and show success message
     resetForm();
     setTransactionType('expense');
@@ -108,6 +111,7 @@ export default function TransactionForm() {
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
         <ScrollView className="p-5">
+          
           {/* Success Message */}
           {showSuccessMessage && (
             <View className="bg-green-500 p-4 rounded-2xl mb-4">
