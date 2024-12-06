@@ -72,7 +72,7 @@ export default function SettingsScreen() {
         {/* Theme Selector */}
         <View className="mb-4 flex flex-col gap-4">
           <Text 
-            className='text-lg font-bold ml-2' 
+            className='text-lg font-bold text-center ml-2' 
             style={styles.label}
           >
             {t('settings.theme')}
@@ -97,7 +97,7 @@ export default function SettingsScreen() {
 
         {/* Currency Selector */}
         <View className="mb-4 flex flex-col gap-4">
-          <Text className='text-lg font-bold ml-2' style={styles.label}>{t('settings.currency')}</Text>
+          <Text className='text-lg font-bold text-center ml-2' style={styles.label}>{t('settings.currency')}</Text>
           <Picker
             selectedValue={currency}
             onValueChange={handleCurrencyChange}
@@ -111,7 +111,7 @@ export default function SettingsScreen() {
 
         {/* Language Selector */}
         <View className="mb-4 flex flex-col gap-4">
-          <Text className='text-lg font-bold ml-2' style={styles.label}>{t('settings.language')}</Text>
+          <Text className='text-lg font-bold text-center ml-2' style={styles.label}>{t('settings.language')}</Text>
           <Picker
             selectedValue={language}
             onValueChange={handleLanguageChange}
