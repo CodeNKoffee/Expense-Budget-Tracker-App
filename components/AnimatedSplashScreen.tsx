@@ -5,7 +5,7 @@ import {
 import LottieView from 'lottie-react-native';
 import Logo from '@/assets/images/splash.json';
 
-export default function SplashScreen() {
+export default function AnimatedSplashScreen() {
   return (
     <View className="bg-budget-charcoal items-center justify-center h-screen bg-ocean-blue">
       <LottieView

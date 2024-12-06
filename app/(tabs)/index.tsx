@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
-import { StatusBar } from 'expo-status-bar';
 
 // Utilities and hooks
 import {
@@ -81,7 +80,6 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className="bg-budget-charcoal flex-1">
-      <StatusBar style="light" />
       <ScrollView
         className="px-8 py-4 flex flex-col"
         contentContainerStyle={{ paddingBottom: 20 }}
