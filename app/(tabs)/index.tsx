@@ -5,14 +5,12 @@ import React, { useEffect, useState } from 'react';
 import {
   ScrollView,
   View,
-  Dimensions,
   SafeAreaView,
   Text,
   TouchableOpacity
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
-import { LineChart } from 'react-native-chart-kit';
 import { StatusBar } from 'expo-status-bar';
 
 // Utilities and hooks
@@ -32,15 +30,12 @@ import { useCurrency } from '../_layout';
 import LoadingScreen from '@/components/shared/LoadingScreen';
 import RecentTransactions from '@/components/RecentTransactions';
 import EditUserNameModal from '@/components/EditUserNameModal';
-
-// Constants
-import { lineChartConfig } from '@/constants';
+import LineChartGraph from '@/components/graphs/LineChartGraph';
 
 
 export default function HomeScreen() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const screenWidth = Dimensions.get('window').width;
   const { currency } = useCurrency();
 
   const [loading, setLoading] = useState(true);
@@ -112,38 +107,19 @@ export default function HomeScreen() {
 
             {/* Financial Stats */}
             <View className='flex flex-col justify-between mb-8'>
-              <View className='w-full flex-1 flex-row justify-between items-center'>
-                <Text className="text-md text-budget-silver mb-1">{t('home.totalIncome')}</Text>
-                <Text className="text-xl font-bold text-white">{formatCurrency(totalIncome, currency)}</Text>
-              </View>
-              <View className='w-full flex-1 flex-row justify-between items-center'>
-                <Text className="text-md text-budget-silver mb-1">{t('home.totalExpenses')}</Text>
-                <Text className="text-xl font-bold text-white">{formatCurrency(totalExpenses, currency)}</Text>
-              </View>
-              <View className='w-full flex-1 flex-row justify-between items-center'>
-                <Text className="text-md text-budget-silver mb-1">{t('home.remainingBalance')}</Text>
-                <Text className="text-xl font-bold text-white">{formatCurrency(remainingBalance, currency)}</Text>
-              </View>
+              {[
+                { label: t('home.totalIncome'), value: totalIncome },
+                { label: t('home.totalExpenses'), value: totalExpenses },
+                { label: t('home.remainingBalance'), value: remainingBalance },
+              ].map((item, index) => (
+                <View key={index} className='w-full flex-1 flex-row justify-between items-center'>
+                  <Text className="text-md text-budget-silver mb-1">{item.label}</Text>
+                  <Text className="text-xl font-bold text-white">{formatCurrency(item.value, currency)}</Text>
+                </View>
+              ))}
             </View>
 
-            {/* Line Chart */}
-            <View className='mb-10'>
-              <Text className="text-lg font-semibold text-white text-center mb-3">{t('home.spendingOverTime')}</Text>
-              <LineChart
-                data={{
-                  labels: chartLabels,
-                  datasets: [
-                    {
-                      data: chartData,
-                    },
-                  ],
-                }}
-                width={screenWidth - 40}
-                height={200}
-                chartConfig={lineChartConfig}
-                bezier
-              />
-            </View>
+            <LineChartGraph chartLabels={chartLabels} chartData={chartData} />
 
             <RecentTransactions />
           </>

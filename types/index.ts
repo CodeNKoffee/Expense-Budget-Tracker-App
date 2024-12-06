@@ -14,6 +14,11 @@ export interface EditUserNameModalProps {
   onCancel: () => void;
 }
 
+export interface LineChartGraphProps {
+  chartLabels: string[];
+  chartData: number[];
+}
+
 export interface Transaction {
   id?: string;
   merchant: string;
