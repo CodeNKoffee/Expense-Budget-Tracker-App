@@ -4,8 +4,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { useTranslation } from 'react-i18next';
 
 export default function LoadingScreen() {
-  const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   return (
     <View className="bg-budget-charcoal flex-1 justify-center items-center gap-4">

@@ -5,14 +5,14 @@ import { Picker } from '@react-native-picker/picker';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { supportCurrencies, supportLanguages } from '@/constants';
-import { Currency } from '@/types';
+import { Currency, Language } from '@/types';
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
 
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('dark');
   const [currency, setCurrency] = useState<Currency>('USD');
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState<Language>('en');
 
   // Load settings from AsyncStorage when component mounts
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function SettingsScreen() {
   // Use useEffect for currency update
   useEffect(() => {
     const updateCurrency = async () => {
-      console.log("Currency updated to:", currency); // Debug log
+      console.log("Currency updated to:", currency);
       await AsyncStorage.setItem('currency', currency);
     };
 

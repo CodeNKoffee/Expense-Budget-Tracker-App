@@ -38,10 +38,10 @@ export default function HomeScreen() {
   const dispatch = useAppDispatch();
   const { currency } = useCurrency();
 
-  const [loading, setLoading] = useState(true);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [userName, setUserName] = useState('Captain');
-  const [inputValue, setInputValue] = useState('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>('Captain');
+  const [inputValue, setInputValue] = useState<string>('');
 
   // Select transactions from Redux store
   const transactions = useAppSelector((state) => state.transactions.transactions);

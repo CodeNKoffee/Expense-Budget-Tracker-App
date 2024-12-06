@@ -1,4 +1,4 @@
-import { supportCurrencies } from "@/constants";
+import { supportCurrencies, supportLanguages } from "@/constants";
 
 export type ExternalLinkProps = {
   href: string;
@@ -40,3 +40,6 @@ export type TransactionListProps = {
 
 // Union type of all the elements in the supportCurrencies array
 export type Currency = typeof supportCurrencies[number]
+
+// Union type of all the elements in the supportLanguages array
+export type Language = typeof supportLanguages[number]
