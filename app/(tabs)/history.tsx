@@ -1,27 +1,22 @@
-// React and React hooks
-import React, { useEffect, useState } from "react";
-// Third-party libraries
+import React, { useState, useEffect } from "react";
 import { ScrollView, View, Text, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
-// Utilities and hooks
 import { useAppSelector } from "@/hooks/useAppDispatch";
-import { useCurrency } from "../_layout";
-// Components
 import TransactionList from "@/components/shared/TransactionList";
 import LoadingScreen from "@/components/shared/LoadingScreen";
 
 export default function HistoryScreen() {
   const transactions = useAppSelector((state) => state.transactions.transactions);
   const { t } = useTranslation();
-  const { currency } = useCurrency();
-
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Log transactions whenever they change
   useEffect(() => {
-    console.log('Recent Transactions updated:', transactions);
-    setLoading(false);
-  }, [transactions]);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <SafeAreaView className="bg-budget-charcoal flex-1">
