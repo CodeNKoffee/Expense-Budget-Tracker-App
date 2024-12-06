@@ -4,6 +4,11 @@
     "title": "Oups !",
     "description": "Vous êtes tombé sur une page qui n'existe pas."
   },
+  "editUsername": {
+    "enterYourName": "Entrez votre nom",
+    "cancel": "Annuler",
+    "save": "Enregistrer"
+  },
   "home": {
     "goodMorning": "Bonjour,",
     "goodAfternoon": "Bon après-midi,",

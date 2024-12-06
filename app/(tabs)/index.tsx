@@ -1,33 +1,52 @@
 // React and React hooks
 import React, { useEffect, useState } from 'react';
+
 // Third-party libraries
-import { ScrollView, View, Dimensions, SafeAreaView, Text, TouchableOpacity, Modal, TextInput, I18nManager } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Dimensions,
+  SafeAreaView,
+  Text,
+  TouchableOpacity
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
 import { LineChart } from 'react-native-chart-kit';
+import { StatusBar } from 'expo-status-bar';
+
 // Utilities and hooks
-import { getGreeting, formatCurrency, calculateTotalIncome, calculateTotalExpenses, getPastSixMonthsLabels } from '@/utils';
+import {
+  getGreeting,
+  formatCurrency,
+  calculateTotalIncome,
+  calculateTotalExpenses,
+  getPastSixMonthsLabels,
+  aggregateExpensesByMonth
+} from '@/utils';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
 import { fetchTransactions } from '@/redux/transactionsSlice';
 import { useCurrency } from '../_layout';
+
 // Components
-import RecentTransactions from '@/components/RecentTransactions';
-import { lineChartConfig } from '@/constants';
-import { StatusBar } from 'expo-status-bar';
 import LoadingScreen from '@/components/shared/LoadingScreen';
-import { aggregateExpensesByMonth } from '@/utils';
+import RecentTransactions from '@/components/RecentTransactions';
+import EditUserNameModal from '@/components/EditUserNameModal';
+
+// Constants
+import { lineChartConfig } from '@/constants';
+
 
 export default function HomeScreen() {
   const { t } = useTranslation();
-  const isRTL = I18nManager.isRTL;
   const dispatch = useAppDispatch();
   const screenWidth = Dimensions.get('window').width;
   const { currency } = useCurrency();
 
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [userName, setUserName] = useState('Captain');  // State to store the dynamic name
-  const [inputValue, setInputValue] = useState('');  // For user input in the modal
+  const [userName, setUserName] = useState('Captain');
+  const [inputValue, setInputValue] = useState('');
 
   // Select transactions from Redux store
   const transactions = useAppSelector((state) => state.transactions.transactions);
@@ -50,6 +69,7 @@ export default function HomeScreen() {
   const chartLabels = pastSixMonthsLabels; 
   const chartData = pastSixMonthsLabels.map(label => aggregatedExpenses[label]);
 
+  // Save user input to AsyncStorage
   const handleSave = async () => {
     try {
       await AsyncStorage.setItem('userName', inputValue);
@@ -60,6 +80,7 @@ export default function HomeScreen() {
     }
   };
 
+  // Handle input change in the modal
   const handleModalInputChange = (text: string) => {
     setInputValue(text);
   };
@@ -124,47 +145,19 @@ export default function HomeScreen() {
               />
             </View>
 
-            {/* Recent Transactions List */}
             <RecentTransactions />
           </>
         )}
       </ScrollView>
 
       {/* Modal for Editing Name */}
-      <Modal
-        visible={modalVisible}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View className=" bg-budget-charcoal bg-opacity-50 flex-1 justify-center items-center">
-          <View className="bg-white p-6 rounded-2xl w-72 flex flex-col items-center">
-            <View className="w-full mb-4">
-              <Text className="text-lg text-budget-charcoal font-bold mb-2">Enter your name</Text>
-              <TextInput
-                className="bg-white rounded-2xl border-4 border-budget-tangerine mb-4 px-4 py-2 text-center"
-                value={inputValue}
-                onChangeText={handleModalInputChange}
-              />
-            </View>
-
-            <View className="w-full flex flex-col-reverse justify-between items-center gap-4">
-              <TouchableOpacity 
-                className="bg-transparent border border-orange-500 rounded-2xl w-full p-4"
-                onPress={() => setModalVisible(false)} 
-              >
-                <Text className="text-orange-500 text-center font-bold">Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity 
-                className="bg-orange-500 rounded-2xl w-full p-4"
-                onPress={handleSave} 
-              >
-                <Text className="text-white text-center font-bold">Save</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <EditUserNameModal 
+        visible={modalVisible} 
+        inputValue={inputValue} 
+        onInputChange={handleModalInputChange} 
+        onSave={handleSave} 
+        onCancel={() => setModalVisible(false)} 
+      />
     </SafeAreaView>
   );
 }

@@ -4,6 +4,11 @@
     "title": "Ой!",
     "description": "Вы попали на страницу, которой не существует."
   },
+  "editUsername": {
+    "enterYourName": "Введите ваше имя",
+    "cancel": "Отмена",
+    "save": "Сохранить"
+  },
   "home": {
     "goodMorning": "Доброе утро,",
     "goodAfternoon": "Добрый день,",

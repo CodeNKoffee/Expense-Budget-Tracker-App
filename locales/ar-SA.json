@@ -4,6 +4,11 @@
     "title": "عذرًا!",
     "description": "لقد وصلت إلى صفحة غير موجودة."
   },
+  "editUsername": {
+    "enterYourName": "أدخل اسمك",
+    "cancel": "إلغاء",
+    "save": "حفظ"
+  },
   "home": {
     "goodMorning": "صباح الخير،",
     "goodAfternoon": "مساء الخير،",

@@ -4,6 +4,11 @@
     "title": "Ups!",
     "description": "Du bist auf eine Seite gestoßen, die nicht existiert."
   },
+  "editUsername": {
+    "enterYourName": "Geben Sie Ihren Namen ein",
+    "cancel": "Abbrechen",
+    "save": "Speichern"
+  },
   "home": {
     "goodMorning": "Guten Morgen,",
     "goodAfternoon": "Guten Tag,",

@@ -6,6 +6,14 @@ export type ExternalLinkProps = {
   className?: string;
 };
 
+export interface EditUserNameModalProps {
+  visible: boolean;
+  inputValue: string;
+  onInputChange: (text: string) => void;
+  onSave: () => void;
+  onCancel: () => void;
+}
+
 export interface Transaction {
   id?: string;
   merchant: string;

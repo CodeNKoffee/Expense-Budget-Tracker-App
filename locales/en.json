@@ -4,6 +4,11 @@
     "title": "Oops!",
     "description": "You stumbled across a screen that does not exist."
   },
+  "editUsername": {
+    "enterYourName": "Enter your name",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
   "home": {
     "goodMorning": "Good morning,",
     "goodAfternoon": "Good afternoon,",
