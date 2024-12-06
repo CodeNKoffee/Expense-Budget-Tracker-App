@@ -26,4 +26,4 @@ export default function ExpensePieChart({ expenseData }: ExpensePieChartProps) {
       />
     </View>
   );
-};
+}

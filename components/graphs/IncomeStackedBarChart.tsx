@@ -20,7 +20,7 @@ export default function IncomeStackedBarChart({ barData, chartConfig }: StackedB
           width={screenWidth - 100}
           height={180}
           chartConfig={chartConfig}
-          hideLegend={true}
+          hideLegend
           style={{
             marginLeft: 10,
           }}
@@ -44,4 +44,4 @@ export default function IncomeStackedBarChart({ barData, chartConfig }: StackedB
       </View>
     </View>
   );
-};
+}

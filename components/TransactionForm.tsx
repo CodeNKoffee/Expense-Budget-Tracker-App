@@ -2,16 +2,18 @@
 import React, { useState } from 'react';
 
 // Third-party libraries
-import { View, Text, TextInput, TouchableOpacity, Switch, ScrollView } from 'react-native';
+import {
+  View, Text, TextInput, TouchableOpacity, Switch, ScrollView,
+} from 'react-native';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
 // Utilities and hooks
+import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { addTransaction } from '@/redux/transactionsSlice';
 import { Transaction } from '@/types';
-import { v4 as uuidv4 } from 'uuid';
 
 // Date format for transaction date
 const dateFormat = new Intl.DateTimeFormat('en-US', {
@@ -35,9 +37,8 @@ const validationSchema = Yup.object({
   date: Yup.string().test(
     'is-valid-date',
     'Invalid date format. Use format: Tue, 3 Dec • 3:30 PM',
-    (value) =>
-      !value || 
-      /^([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) • (\d{1,2}):(\d{2}) (AM|PM)$/.test(value)
+    (value) => !value
+      || /^([a-zA-Z]{3}), (\d{1,2}) ([a-zA-Z]{3}) • (\d{1,2}):(\d{2}) (AM|PM)$/.test(value),
   ),
 });
 
@@ -64,13 +65,13 @@ export default function TransactionForm() {
       amount: string;
       date: string;
       type: string;
-    }>
+    }>,
   ) => {
     // Use the state variable instead of values.type
     const transactionDate = useCurrentTime
       ? values.date
       : dateFormat(new Date());
-  
+
     const newTransaction: Transaction = {
       merchant: values.merchant,
       category: values.category,
@@ -79,7 +80,7 @@ export default function TransactionForm() {
       date: transactionDate,
       id: uuidv4(),
     };
-  
+
     dispatch(addTransaction(newTransaction));
 
     // Reset form and show success message
@@ -87,7 +88,7 @@ export default function TransactionForm() {
     setTransactionType('expense');
     setUseCurrentTime(false);
     setShowSuccessMessage(true);
-  
+
     // Hide success message after 3 seconds
     setTimeout(() => {
       setShowSuccessMessage(false);
@@ -106,16 +107,18 @@ export default function TransactionForm() {
       validationSchema={validationSchema}
       onSubmit={handleAddTransaction}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+      {({
+        handleChange, handleBlur, handleSubmit, values, errors, touched,
+      }) => (
         <ScrollView className="p-5">
 
           {/* Success Message */}
           {showSuccessMessage && (
-            <View className="bg-green-500 p-4 rounded-2xl mb-4">
-              <Text className="text-white text-center font-bold">
-                {t('transactions.successMessage')}
-              </Text>
-            </View>
+          <View className="bg-green-500 p-4 rounded-2xl mb-4">
+            <Text className="text-white text-center font-bold">
+              {t('transactions.successMessage')}
+            </Text>
+          </View>
           )}
 
           {/* Merchant Field */}
@@ -130,7 +133,7 @@ export default function TransactionForm() {
               }`}
             />
             {errors.merchant && touched.merchant && (
-              <Text className="text-red-500 text-sm">{errors.merchant}</Text>
+            <Text className="text-red-500 text-sm">{errors.merchant}</Text>
             )}
           </View>
 
@@ -146,7 +149,7 @@ export default function TransactionForm() {
               }`}
             />
             {errors.category && touched.category && (
-              <Text className="text-red-500 text-sm">{errors.category}</Text>
+            <Text className="text-red-500 text-sm">{errors.category}</Text>
             )}
           </View>
 
@@ -163,7 +166,7 @@ export default function TransactionForm() {
               }`}
             />
             {errors.amount && touched.amount && (
-              <Text className="text-red-500 text-sm">{errors.amount}</Text>
+            <Text className="text-red-500 text-sm">{errors.amount}</Text>
             )}
           </View>
 
@@ -174,9 +177,7 @@ export default function TransactionForm() {
               <Text className="text-white text-sm">{t('transactions.expense')}</Text>
               <Switch
                 value={transactionType === 'income'}
-                onValueChange={(value) =>
-                  setTransactionType(value ? 'income' : 'expense')
-                }
+                onValueChange={(value) => setTransactionType(value ? 'income' : 'expense')}
                 trackColor={{
                   false: '#ACACAC',
                   true: '#2A2A2A',
@@ -204,21 +205,21 @@ export default function TransactionForm() {
               <Text className="text-white text-sm">{t('transactions.manuallyEnterTime')}</Text>
             </View>
             {useCurrentTime && (
-              <View className='mt-4'>
-                <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.enterDate&Time')}</Text>
-                <TextInput
-                  onChangeText={handleChange('date')}
-                  onBlur={handleBlur('date')}
-                  value={values.date}
-                  placeholderTextColor="#ACACAC"
-                  className={`bg-white border-4 border-budget-tangerine mt-2 mb-4 p-3 rounded-2xl ${
-                    errors.date && touched.date ? 'border-red-500' : ''
-                  }`}
-                />
-              </View>
+            <View className="mt-4">
+              <Text className="text-lg font-bold mb-2 text-budget-snow">{t('transactions.enterDate&Time')}</Text>
+              <TextInput
+                onChangeText={handleChange('date')}
+                onBlur={handleBlur('date')}
+                value={values.date}
+                placeholderTextColor="#ACACAC"
+                className={`bg-white border-4 border-budget-tangerine mt-2 mb-4 p-3 rounded-2xl ${
+                  errors.date && touched.date ? 'border-red-500' : ''
+                }`}
+              />
+            </View>
             )}
             {errors.date && touched.date && (
-              <Text className="text-red-500 text-sm">{errors.date}</Text>
+            <Text className="text-red-500 text-sm">{errors.date}</Text>
             )}
           </View>
 

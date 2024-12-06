@@ -85,14 +85,13 @@ const styles = StyleSheet.create({
 });
 
 // iconWrapperStyle function returns the style for the icon wrapper based on whether the tab is focused
-const iconWrapperStyle = (focused: boolean) =>
-  StyleSheet.create({
-    iconWrapper: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-      backgroundColor: focused ? '#F76D35' : 'transparent',
-    },
-  }).iconWrapper;
+const iconWrapperStyle = (focused: boolean) => StyleSheet.create({
+  iconWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: focused ? '#F76D35' : 'transparent',
+  },
+}).iconWrapper;

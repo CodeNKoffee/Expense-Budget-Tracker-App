@@ -1,4 +1,4 @@
-import { supportCurrencies, supportLanguages } from "@/constants";
+import { supportCurrencies, supportLanguages } from '@/constants';
 
 export type ExternalLinkProps = {
   href: string;

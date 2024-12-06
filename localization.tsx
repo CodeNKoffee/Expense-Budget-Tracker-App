@@ -1,4 +1,3 @@
-import { I18nManager } from 'react-native';
 import * as Localization from 'expo-localization';
 import { initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
@@ -22,12 +21,12 @@ i18n
     fallbackLng: 'en',
     lng: detectLanguage(),
     resources: {
-      'en': { translation: en },
+      en: { translation: en },
       'ar-EG': { translation: arEG },
       'ar-SA': { translation: arSA },
-      'fr': { translation: fr },
-      'de': { translation: de },
-      'ru': { translation: ru },
+      fr: { translation: fr },
+      de: { translation: de },
+      ru: { translation: ru },
     },
     interpolation: {
       escapeValue: false,

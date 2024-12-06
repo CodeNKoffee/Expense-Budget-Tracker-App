@@ -1,23 +1,24 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext, useContext, useEffect, useState,
+} from 'react';
 
-import "react-native-reanimated";
-import "react-native-get-random-values";
+import 'react-native-reanimated';
+import 'react-native-get-random-values';
 
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import { Provider } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { useFonts } from 'expo-font';
+import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
+import { Provider } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 
-import "../global.css";
+import '../global.css';
 
-import store from "@/redux/store";
-import { useColorScheme } from "../hooks/useColorScheme";
-import { Currency } from "@/types";
-import AnimatedSplashScreen from "@/components/AnimatedSplashScreen";
-
+import store from '@/redux/store';
+import { useColorScheme } from '../hooks/useColorScheme';
+import { Currency } from '@/types';
+import AnimatedSplashScreen from '@/components/AnimatedSplashScreen';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -30,24 +31,24 @@ SplashScreen.setOptions({
 
 // Create a context to provide the currency throughout the app
 const CurrencyContext = createContext({
-  currency: "USD",
+  currency: 'USD',
   setCurrency: (currency: Currency) => {},
 });
 
 export const useCurrency = () => useContext(CurrencyContext);
 
 export default function RootLayout() {
-  const [currency, setCurrency] = useState<Currency>("USD");
+  const [currency, setCurrency] = useState<Currency>('USD');
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
   const [showSplash, setShowSplash] = useState<boolean>(true);
 
   useEffect(() => {
     const loadCurrency = async () => {
-      const storedCurrency = await AsyncStorage.getItem("currency");
+      const storedCurrency = await AsyncStorage.getItem('currency');
       if (storedCurrency) {
         setCurrency(storedCurrency);
       }
@@ -73,7 +74,7 @@ export default function RootLayout() {
     <Provider store={store}>
       <CurrencyContext.Provider value={{ currency, setCurrency }}>
         <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
         >
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

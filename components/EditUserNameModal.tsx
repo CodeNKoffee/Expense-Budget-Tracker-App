@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Modal } from 'react-native';
+import {
+  View, Text, TextInput, TouchableOpacity, Modal,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { EditUserNameModalProps } from '@/types';
 
@@ -8,14 +10,14 @@ export default function EditUserNameModal({
   inputValue,
   onInputChange,
   onSave,
-  onCancel
+  onCancel,
 }: EditUserNameModalProps) {
   const { t } = useTranslation();
 
   return (
     <Modal
       visible={visible}
-      transparent={true}
+      transparent
       animationType="fade"
       onRequestClose={onCancel}
     >
@@ -31,15 +33,15 @@ export default function EditUserNameModal({
           </View>
 
           <View className="w-full flex flex-col-reverse justify-between items-center gap-4">
-            <TouchableOpacity 
+            <TouchableOpacity
               className="bg-transparent border border-orange-500 rounded-2xl w-full p-4"
-              onPress={onCancel} 
+              onPress={onCancel}
             >
               <Text className="text-orange-500 text-center font-bold">{t('editUsername.cancel')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
+            <TouchableOpacity
               className="bg-orange-500 rounded-2xl w-full p-4"
-              onPress={onSave} 
+              onPress={onSave}
             >
               <Text className="text-white text-center font-bold">{t('editUsername.save')}</Text>
             </TouchableOpacity>
@@ -48,4 +50,4 @@ export default function EditUserNameModal({
       </View>
     </Modal>
   );
-};
+}

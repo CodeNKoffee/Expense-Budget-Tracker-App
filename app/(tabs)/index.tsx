@@ -7,7 +7,7 @@ import {
   View,
   SafeAreaView,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,7 @@ import {
   calculateTotalIncome,
   calculateTotalExpenses,
   getPastSixMonthsLabels,
-  aggregateExpensesByMonth
+  aggregateExpensesByMonth,
 } from '@/utils';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
 import { fetchTransactions } from '@/redux/transactionsSlice';
@@ -31,7 +31,6 @@ import LoadingScreen from '@/components/shared/LoadingScreen';
 import RecentTransactions from '@/components/RecentTransactions';
 import EditUserNameModal from '@/components/EditUserNameModal';
 import LineChartGraph from '@/components/graphs/SpendingLineChart';
-
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -59,10 +58,10 @@ export default function HomeScreen() {
   const totalExpenses = calculateTotalExpenses(transactions);
   const remainingBalance = totalIncome - totalExpenses;
 
-  const pastSixMonthsLabels = getPastSixMonthsLabels(); 
-  const aggregatedExpenses = aggregateExpensesByMonth(transactions, pastSixMonthsLabels); 
-  const chartLabels = pastSixMonthsLabels; 
-  const chartData = pastSixMonthsLabels.map(label => aggregatedExpenses[label]);
+  const pastSixMonthsLabels = getPastSixMonthsLabels();
+  const aggregatedExpenses = aggregateExpensesByMonth(transactions, pastSixMonthsLabels);
+  const chartLabels = pastSixMonthsLabels;
+  const chartData = pastSixMonthsLabels.map((label) => aggregatedExpenses[label]);
 
   // Save user input to AsyncStorage
   const handleSave = async () => {
@@ -83,14 +82,18 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className="bg-budget-charcoal flex-1">
       <StatusBar style="light" />
-      <ScrollView 
-        className="px-8 py-4 flex flex-col" 
+      <ScrollView
+        className="px-8 py-4 flex flex-col"
         contentContainerStyle={{ paddingBottom: 20 }}
       >
         {/* Header */}
         <View className="mb-8 flex flex-col items-center">
           <Text className="text-2xl font-bold text-white">
-            {t(getGreeting())} {userName} 💸
+            {t(getGreeting())}
+            {' '}
+            {userName}
+            {' '}
+            💸
           </Text>
         </View>
 
@@ -106,13 +109,13 @@ export default function HomeScreen() {
             </TouchableOpacity>
 
             {/* Financial Stats */}
-            <View className='flex flex-col justify-between mb-8'>
+            <View className="flex flex-col justify-between mb-8">
               {[
                 { label: t('home.totalIncome'), value: totalIncome },
                 { label: t('home.totalExpenses'), value: totalExpenses },
                 { label: t('home.remainingBalance'), value: remainingBalance },
               ].map((item, index) => (
-                <View key={index} className='w-full flex-1 flex-row justify-between items-center'>
+                <View key={index} className="w-full flex-1 flex-row justify-between items-center">
                   <Text className="text-md text-budget-silver mb-1">{item.label}</Text>
                   <Text className="text-xl font-bold text-white">{formatCurrency(item.value, currency)}</Text>
                 </View>
@@ -127,12 +130,12 @@ export default function HomeScreen() {
       </ScrollView>
 
       {/* Modal for Editing Name */}
-      <EditUserNameModal 
-        visible={modalVisible} 
-        inputValue={inputValue} 
-        onInputChange={handleModalInputChange} 
-        onSave={handleSave} 
-        onCancel={() => setModalVisible(false)} 
+      <EditUserNameModal
+        visible={modalVisible}
+        inputValue={inputValue}
+        onInputChange={handleModalInputChange}
+        onSave={handleSave}
+        onCancel={() => setModalVisible(false)}
       />
     </SafeAreaView>
   );

@@ -26,5 +26,5 @@ export const MockApiService = {
       console.error('Error adding transaction:', error);
       throw error;
     }
-  }
+  },
 };

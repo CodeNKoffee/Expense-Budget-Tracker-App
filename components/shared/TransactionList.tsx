@@ -1,10 +1,12 @@
-import React from "react";
-import { View, Text, ScrollView } from "react-native";
-import { formatCurrency } from "@/utils";
-import { useCurrency } from "@/app/_layout";
-import { TransactionListProps } from "@/types";
+import React from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { formatCurrency } from '@/utils';
+import { useCurrency } from '@/app/_layout';
+import { TransactionListProps } from '@/types';
 
-export default function TransactionList({ transactions, maxItems, whiteBG, listPaddingBottom }: TransactionListProps) {
+export default function TransactionList({
+  transactions, maxItems, whiteBG, listPaddingBottom,
+}: TransactionListProps) {
   const { currency } = useCurrency();
 
   // Determine how many transactions to slice
@@ -15,9 +17,9 @@ export default function TransactionList({ transactions, maxItems, whiteBG, listP
 
   return (
     <ScrollView
-      contentContainerStyle={{ 
+      contentContainerStyle={{
         paddingBottom: listPaddingBottom || 0,
-        flexGrow: 1
+        flexGrow: 1,
       }}
     >
       {transactionsToDisplay.slice(0, maxItems || transactions.length).map((transaction, index) => {
@@ -36,16 +38,16 @@ export default function TransactionList({ transactions, maxItems, whiteBG, listP
             <Text
               className={`${
                 transaction.type === 'income'
-                  ? "text-budget-income"
+                  ? 'text-budget-income'
                   : transaction.type === 'expense'
-                  ? "text-budget-expense"
-                  : useAlternateLogic
-                  ? !transaction.type
-                    ? "text-budget-income"
-                    : "text-budget-expense"
-                  : transaction.type
-                  ? "text-budget-income"
-                  : "text-budget-expense"
+                    ? 'text-budget-expense'
+                    : useAlternateLogic
+                      ? !transaction.type
+                        ? 'text-budget-income'
+                        : 'text-budget-expense'
+                      : transaction.type
+                        ? 'text-budget-income'
+                        : 'text-budget-expense'
               } font-bold text-xl`}
             >
               {formatCurrency(transaction.amount, currency)}

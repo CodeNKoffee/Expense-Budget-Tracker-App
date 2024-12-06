@@ -1,7 +1,7 @@
 // React and React hooks
 import React from 'react';
 // Third-party libraries
-import { Text, View } from "react-native";
+import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 // Utilities and hooks
@@ -13,13 +13,13 @@ export default function RecentTransactions() {
   const { t } = useTranslation();
 
   return (
-    <View 
-      className="rounded-3xl bg-budget-snow px-6 py-4 flex flex-col" 
+    <View
+      className="rounded-3xl bg-budget-snow px-6 py-4 flex flex-col"
       style={{ height: 250 }}
     >
-      <View className='w-full flex items-center'>
+      <View className="w-full flex items-center">
         <Text
-          className={`text-lg font-bold text-budget-silver pb-2`}
+          className="text-lg font-bold text-budget-silver pb-2"
         >
           {t('home.recentTransactions')}
         </Text>

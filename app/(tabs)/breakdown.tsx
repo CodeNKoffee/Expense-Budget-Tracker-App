@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from 'react';
 
 // Third-party libraries
-import { ScrollView, Dimensions, View, Text } from 'react-native';
+import {
+  ScrollView, Dimensions, View, Text,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
@@ -51,17 +53,17 @@ export default function BreakdownScreen() {
           <>
             {/* Pie Chart */}
             <ExpensePieChart expenseData={expenseData} />
-              
+
             {/* Stacked Bar Chart */}
             <IncomeStackedBarChart barData={barData} chartConfig={chartConfig} />
 
             {/* Additional Analysis */}
-            <View className='mt-8'>
-              <Text className='text-white text-base font-semibold text-center mb-2'>
+            <View className="mt-8">
+              <Text className="text-white text-base font-semibold text-center mb-2">
                 {t('breakdown.otherInsights')}
               </Text>
               <ExternalLink
-                className='text-budget-silver text-center text-sm'
+                className="text-budget-silver text-center text-sm"
                 href="https://hatemsoliman.dev"
               >
                 {t('breakdown.insightsLink')}

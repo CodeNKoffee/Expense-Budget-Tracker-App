@@ -1,6 +1,5 @@
 // Home Screen
 
-
 // Data for LineChart
 export const lineChartConfig = {
   backgroundGradientFrom: '#101010',
@@ -52,26 +51,25 @@ export const chartConfig = {
   },
 };
 
-
 // Settings Screen
 // List of supported currencies
 export const supportCurrencies = [
-  'USD', 
-  'GBP', 
-  'EUR', 
-  'EGP', 
-  'SAR', 
-  'AED', 
-  'CAD', 
-  'RUB'
+  'USD',
+  'GBP',
+  'EUR',
+  'EGP',
+  'SAR',
+  'AED',
+  'CAD',
+  'RUB',
 ];
 
 // List of supported languages
 export const supportLanguages = [
-  'en', 
-  'ar-EG', 
-  'ar-SA', 
-  'fr', 
-  'de', 
-  'ru'
-]
+  'en',
+  'ar-EG',
+  'ar-SA',
+  'fr',
+  'de',
+  'ru',
+];

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {
+  SafeAreaView, View, StyleSheet, Text, TouchableOpacity,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import i18n from 'i18next';
@@ -65,14 +67,14 @@ export default function SettingsScreen() {
   return (
     <SafeAreaView className="bg-budget-charcoal flex-1">
       <View className="px-8 py-4">
-        <View className='mb-8 items-center'>
+        <View className="mb-8 items-center">
           <Text className="text-white text-2xl font-bold pt-4">{t('settings.title')}</Text>
         </View>
 
         {/* Theme Selector */}
         <View className="mb-4 flex flex-col gap-4">
-          <Text 
-            className='text-lg font-bold text-center ml-2' 
+          <Text
+            className="text-lg font-bold text-center ml-2"
             style={styles.label}
           >
             {t('settings.theme')}
@@ -97,7 +99,7 @@ export default function SettingsScreen() {
 
         {/* Currency Selector */}
         <View className="mb-4 flex flex-col gap-4">
-          <Text className='text-lg font-bold text-center ml-2' style={styles.label}>{t('settings.currency')}</Text>
+          <Text className="text-lg font-bold text-center ml-2" style={styles.label}>{t('settings.currency')}</Text>
           <Picker
             selectedValue={currency}
             onValueChange={handleCurrencyChange}
@@ -111,7 +113,7 @@ export default function SettingsScreen() {
 
         {/* Language Selector */}
         <View className="mb-4 flex flex-col gap-4">
-          <Text className='text-lg font-bold text-center ml-2' style={styles.label}>{t('settings.language')}</Text>
+          <Text className="text-lg font-bold text-center ml-2" style={styles.label}>{t('settings.language')}</Text>
           <Picker
             selectedValue={language}
             onValueChange={handleLanguageChange}
@@ -125,7 +127,7 @@ export default function SettingsScreen() {
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   label: {

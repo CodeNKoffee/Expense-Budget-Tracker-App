@@ -1,7 +1,6 @@
-import { ExternalLinkProps } from '@/types';
 import { openBrowserAsync } from 'expo-web-browser';
-import { Platform } from 'react-native';
-import { TouchableOpacity, Text } from 'react-native';
+import { Platform, TouchableOpacity, Text } from 'react-native';
+import { ExternalLinkProps } from '@/types';
 
 export function ExternalLink({ href, children, className }: ExternalLinkProps) {
   const handlePress = async () => {

@@ -10,7 +10,7 @@ export default function SpendingLineChart({ chartLabels, chartData }: LineChartG
   const screenWidth = Dimensions.get('window').width;
 
   return (
-    <View className='mb-10'>
+    <View className="mb-10">
       <Text className="text-lg font-semibold text-white text-center mb-3">{t('home.spendingOverTime')}</Text>
       <LineChart
         data={{
@@ -28,4 +28,4 @@ export default function SpendingLineChart({ chartLabels, chartData }: LineChartG
       />
     </View>
   );
-};
+}

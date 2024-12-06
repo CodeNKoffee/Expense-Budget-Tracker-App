@@ -1,6 +1,6 @@
-import i18n from "@/localization";
-import { Transaction } from "@/types";
 import moment from 'moment';
+import i18n from '@/localization';
+import { Transaction } from '@/types';
 
 // Get a greeting message based on the current time
 export function getGreeting(): string {
@@ -11,30 +11,23 @@ export function getGreeting(): string {
 }
 
 // Calculate the total expenses from a list of transactions
-export const calculateTotalExpenses = (transactions: Transaction[]): number => {
-  return transactions
-    .filter(t => t.type === 'expense')
-    .reduce((total, transaction) => total + transaction.amount, 0);
-};
+export const calculateTotalExpenses = (transactions: Transaction[]): number => transactions
+  .filter((t) => t.type === 'expense')
+  .reduce((total, transaction) => total + transaction.amount, 0);
 
 // Calculate the total income from a list of transactions
-export const calculateTotalIncome = (transactions: Transaction[]): number => {
-  return transactions
-    .filter(t => t.type === 'income')
-    .reduce((total, transaction) => total + transaction.amount, 0);
-};
+export const calculateTotalIncome = (transactions: Transaction[]): number => transactions
+  .filter((t) => t.type === 'income')
+  .reduce((total, transaction) => total + transaction.amount, 0);
 
 // Get categories by type from a list of transactions
-export const getcategorysByType = (transactions: Transaction[]) => {
-  return transactions
-    .filter(t => t.type === 'expense' && t.category)
-    .reduce((categorys, transaction) => {
-      const desc = transaction.category || 'Uncategorized';
-      categorys[desc] =
-        (categorys[desc] || 0) + transaction.amount;
-      return categorys;
-    }, {} as Record<string, number>);
-};
+export const getcategorysByType = (transactions: Transaction[]) => transactions
+  .filter((t) => t.type === 'expense' && t.category)
+  .reduce((categorys, transaction) => {
+    const desc = transaction.category || 'Uncategorized';
+    categorys[desc] = (categorys[desc] || 0) + transaction.amount;
+    return categorys;
+  }, {} as Record<string, number>);
 
 // Format a number as currency based on the current locale
 export const formatCurrency = (amount: number, currency: string): string => {
@@ -59,13 +52,12 @@ export const getPastSixMonthsLabels = () => {
 export const aggregateExpensesByMonth = (transactions: Transaction[], labels: string[]) => {
   const expensesByMonth: { [key: string]: number } = {};
 
-  labels.forEach(label => {
+  labels.forEach((label) => {
     expensesByMonth[label] = 0;
   });
 
-  transactions.forEach(transaction => {
+  transactions.forEach((transaction) => {
     if (transaction.type === 'expense') {
-      const month = moment(transaction.date, 'ddd, MMM D • h:mm A').format('MMM YYYY');
       const shortMonth = moment(transaction.date, 'ddd, MMM D • h:mm A').format('MMM'); // Get short month name
       if (expensesByMonth[shortMonth] !== undefined) {
         expensesByMonth[shortMonth] += transaction.amount;

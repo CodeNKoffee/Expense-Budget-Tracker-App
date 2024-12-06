@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 import { Transaction, TransactionsState } from '../types';
 import { MockApiService } from '@/services/mockApiService';
-import { v4 as uuidv4 } from 'uuid';
 
 const initialState: TransactionsState = {
   transactions: [],
@@ -19,7 +19,7 @@ export const fetchTransactions = createAsyncThunk(
     } catch (error) {
       return rejectWithValue('Failed to fetch transactions');
     }
-  }
+  },
 );
 
 const transactionsSlice = createSlice({
@@ -32,11 +32,11 @@ const transactionsSlice = createSlice({
         ...action.payload,
         id: uuidv4(), // Generate a unique ID
         // Normalize the type to ensure it's either 'income' or 'expense'
-        type: action.payload.type === true ? 'income' : 
-              action.payload.type === false ? 'expense' : 
-              action.payload.type
+        type: action.payload.type === true ? 'income'
+          : action.payload.type === false ? 'expense'
+            : action.payload.type,
       };
-      
+
       // Prepend the new transaction to the start of the array
       state.transactions.push(newTransaction);
     },
