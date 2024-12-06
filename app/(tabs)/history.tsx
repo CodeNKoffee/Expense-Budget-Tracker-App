@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, View, Text, SafeAreaView } from "react-native";
+import { RootState } from "@/redux/store";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/hooks/useAppDispatch";
 import TransactionList from "@/components/shared/TransactionList";
 import LoadingScreen from "@/components/shared/LoadingScreen";
 
 export default function HistoryScreen() {
-  const transactions = useAppSelector((state) => state.transactions.transactions);
+  const transactions = useAppSelector((state: RootState) => state.transactions.transactions);
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(true);
 
