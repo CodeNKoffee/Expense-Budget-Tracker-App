@@ -4,6 +4,8 @@
 
 A comprehensive personal budget tracking mobile application developed as part of a senior React Native developer job application at Foodics.
 
+  [Watch the project overview on Loom](https://www.loom.com/share/3081b1ac448b40659042c948e42e5dd0?sid=b59e5261-6f0a-4559-b914-f67f192c4dd5)
+
 ## Features
 
 ### Core Functionality
