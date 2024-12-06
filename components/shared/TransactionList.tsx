@@ -14,7 +14,12 @@ export default function TransactionList({ transactions, maxItems, whiteBG }: Tra
     .reverse(); // Reverse to show the most recent first
 
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{ 
+        paddingBottom: 50,
+        flexGrow: 1
+      }}
+    >
       {transactionsToDisplay.slice(0, maxItems || transactions.length).map((transaction, index) => {
         const useAlternateLogic = Math.floor(index / 3) % 2 === 1;
 
