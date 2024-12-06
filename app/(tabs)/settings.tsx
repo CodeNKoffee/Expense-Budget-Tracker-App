@@ -1,18 +1,17 @@
-// React and React hooks
 import React, { useState, useEffect } from 'react';
-// Third-party libraries
 import { SafeAreaView, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { supportCurrencies, supportLanguages } from '@/constants';
+import { Currency } from '@/types';
 
 export default function SettingsScreen() {
   const { t } = useTranslation();
 
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('dark');
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState<Currency>('USD');
   const [language, setLanguage] = useState('en');
 
   // Load settings from AsyncStorage when component mounts
