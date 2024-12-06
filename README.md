@@ -154,6 +154,38 @@ This Budget Tracker transforms complex financial data into actionable insights, 
 
 Private project developed for Foodics job application. Not for public distribution.
 
+## Preview
+
+![Preview 1](assets/preview/1.png)
+
+![Preview 2](assets/preview/2.png)
+
+![Preview 3](assets/preview/3.png)
+
+![Preview 4](assets/preview/4.png)
+
+![Preview 5](assets/preview/5.png)
+
+![Preview 6](assets/preview/6.png)
+
+![Preview 7](assets/preview/7.png)
+
+![Preview 8](assets/preview/8.png)
+
+![Preview 9](assets/preview/9.png)
+
+![Preview 10](assets/preview/10.png)
+
+![Preview 11](assets/preview/11.png)
+
+![Preview 12](assets/preview/12.png)
+
+![Preview 13](assets/preview/13.png)
+
+![Preview 14](assets/preview/14.png)
+
+![Preview 15](assets/preview/15.png)
+
 ---
 
 **Note**: This application was developed as a technical assessment for a senior React Native developer position.
