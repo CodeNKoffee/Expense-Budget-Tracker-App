@@ -26,24 +26,5 @@ export const MockApiService = {
       console.error('Error adding transaction:', error);
       throw error;
     }
-  },
-
-  async updateTransaction(id: string, transaction: Transaction): Promise<Transaction> {
-    try {
-      const response = await axios.put(`${MOCKAPI_BASE_URL}/${id}`, transaction);
-      return response.data;
-    } catch (error) {
-      console.error('Error updating transaction:', error);
-      throw error;
-    }
-  },
-
-  async deleteTransaction(id: string): Promise<void> {
-    try {
-      await axios.delete(`${MOCKAPI_BASE_URL}/${id}`);
-    } catch (error) {
-      console.error('Error deleting transaction:', error);
-      throw error;
-    }
   }
 };

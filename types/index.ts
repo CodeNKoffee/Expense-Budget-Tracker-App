@@ -44,7 +44,9 @@ export interface Transaction {
 }
 
 export interface TransactionsState {
-  transactions: [],
+  transactions: Transaction[];
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  error: string | null;
 }
 
 export type TransactionListProps = {
