@@ -6,7 +6,6 @@ import { useCurrency } from "@/app/_layout";
 import { TransactionListProps } from "@/types";
 
 export default function TransactionList({ transactions, maxItems, whiteBG }: TransactionListProps) {
-  console.log('Rendering TransactionList with transactions:', transactions);
   const { currency } = useCurrency();
 
   // Determine how many transactions to slice

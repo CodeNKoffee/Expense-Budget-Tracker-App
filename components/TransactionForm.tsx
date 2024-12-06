@@ -79,9 +79,6 @@ export default function TransactionForm() {
       date: transactionDate,
       id: uuidv4(),
     };
-
-    // Log the transaction before dispatching
-    console.log('Attempting to add transaction:', newTransaction);
   
     dispatch(addTransaction(newTransaction));
 
@@ -111,7 +108,7 @@ export default function TransactionForm() {
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
         <ScrollView className="p-5">
-          
+
           {/* Success Message */}
           {showSuccessMessage && (
             <View className="bg-green-500 p-4 rounded-2xl mb-4">

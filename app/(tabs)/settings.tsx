@@ -44,7 +44,6 @@ export default function SettingsScreen() {
   // Use useEffect for currency update
   useEffect(() => {
     const updateCurrency = async () => {
-      console.log("Currency updated to:", currency);
       await AsyncStorage.setItem('currency', currency);
     };
 
