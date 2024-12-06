@@ -30,7 +30,7 @@ import { useCurrency } from '../_layout';
 import LoadingScreen from '@/components/shared/LoadingScreen';
 import RecentTransactions from '@/components/RecentTransactions';
 import EditUserNameModal from '@/components/EditUserNameModal';
-import LineChartGraph from '@/components/graphs/LineChartGraph';
+import LineChartGraph from '@/components/graphs/SpendingLineChart';
 
 
 export default function HomeScreen() {

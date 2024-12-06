@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { lineChartConfig } from '@/constants';
 import { LineChartGraphProps } from '@/types';
 
-export default function LineChartGraph({ chartLabels, chartData }: LineChartGraphProps) {
+export default function SpendingLineChart({ chartLabels, chartData }: LineChartGraphProps) {
   const { t } = useTranslation();
   const screenWidth = Dimensions.get('window').width;
 

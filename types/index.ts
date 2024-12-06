@@ -19,6 +19,21 @@ export interface LineChartGraphProps {
   chartData: number[];
 }
 
+export interface StackedBarChartGraphProps {
+  barData: any;
+  chartConfig: any;
+}
+
+export interface ExpenseItem {
+  name: string;
+  amount: number;
+  color: string;
+}
+
+export interface ExpensePieChartProps {
+  expenseData: ExpenseItem[];
+}
+
 export interface Transaction {
   id?: string;
   merchant: string;

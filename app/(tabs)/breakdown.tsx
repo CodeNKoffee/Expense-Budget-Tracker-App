@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 // Third-party libraries
 import { ScrollView, Dimensions, View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { PieChart, StackedBarChart } from 'react-native-chart-kit';
 import { useTranslation } from 'react-i18next';
 
 // Utilities and hooks
@@ -15,6 +14,8 @@ import { barData, chartConfig, expenseData } from '@/constants';
 // Components
 import { ExternalLink } from '@/components/ExternalLink';
 import LoadingScreen from '@/components/shared/LoadingScreen';
+import IncomeStackedBarChart from '@/components/graphs/IncomeStackedBarChart';
+import ExpensePieChart from '@/components/graphs/ExpensePieChart';
 
 export default function BreakdownScreen() {
   const { t } = useTranslation();
@@ -49,59 +50,13 @@ export default function BreakdownScreen() {
         ) : (
           <>
             {/* Pie Chart */}
-            <View className="mb-12">
-              <PieChart
-                data={expenseData.map((item) => ({
-                  name: item.name,
-                  population: item.amount,
-                  color: item.color,
-                  legendFontColor: '#FFF',
-                  legendFontSize: 12,
-                }))}
-                width={screenWidth - 40}
-                height={220}
-                chartConfig={chartConfig}
-                accessor="population"
-                backgroundColor="transparent"
-                paddingLeft="16"
-              />
-            </View>
-
-            {/* Bar Chart */}
-            <View className="mb-12">
-              <Text className="text-white text-lg text-center font-semibold mb-2">
-                {t('breakdown.incomeOverPastSixMonths')}
-              </Text>
-              <StackedBarChart
-                data={barData}
-                width={screenWidth - 80}
-                height={180}
-                chartConfig={chartConfig}
-                hideLegend={true}
-                style={{
-                  marginHorizontal: 10,
-                }}
-              />
-
-              {/* Custom Legend */}
-              <View className="mt-4 flex flex-row justify-center flex-wrap">
-                {barData.legend.map((label, index) => (
-                  <View
-                    key={index}
-                    className="mr-4 mb-2 flex flex-row items-center"
-                  >
-                    <View
-                      className="rounded-md w-4 h-4 mr-4"
-                      style={{ backgroundColor: barData.barColors[index] }}
-                    />
-                    <Text className="text-white text-sm">{label}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
+            <ExpensePieChart expenseData={expenseData} />
+              
+            {/* Stacked Bar Chart */}
+            <IncomeStackedBarChart barData={barData} chartConfig={chartConfig} />
 
             {/* Additional Analysis */}
-            <View>
+            <View className='mt-8'>
               <Text className='text-white text-base font-semibold text-center mb-2'>
                 {t('breakdown.otherInsights')}
               </Text>
