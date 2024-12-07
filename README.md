@@ -1,5 +1,7 @@
 # Financial Freedom Companion: Personal Budget Maestro
 
+![Foodics banner](./assets/preview/foodics.png)
+
 ## Project Overview
 
 A comprehensive personal budget tracking mobile application developed as part of a senior React Native developer job application at Foodics.
