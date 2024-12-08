@@ -17,6 +17,7 @@ export default function SettingsScreen() {
   const [currency, setCurrency] = useState<Currency>('USD');
   const [language, setLanguage] = useState<Language>('en');
   const [refreshing, setRefreshing] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
 
   // Load settings from AsyncStorage when component mounts
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function SettingsScreen() {
       i18n.changeLanguage(savedLanguage);
     };
 
-    loadSettings();
+    loadSettings().then(() => setInitialLoad(false));
   }, []);
 
   const saveSetting = async (key: string, value: string) => {
@@ -39,33 +40,35 @@ export default function SettingsScreen() {
   };
 
   const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
-    if (theme !== 'dark') {
+    if (theme !== newTheme) {
       setTheme(newTheme);
       saveSetting('theme', newTheme);
-      Alert.alert(t('settings.savedMessage'));
+      if (!initialLoad) Alert.alert(t('settings.savedMessage'));
     }
   };
 
   useEffect(() => {
     const updateCurrency = async () => {
       await AsyncStorage.setItem('currency', currency);
-      Alert.alert(t('settings.savedMessage'));
+      if (!initialLoad) Alert.alert(t('settings.savedMessage')); // Show alert only if not initial load
     };
 
-    if (currency) {
+    if (!initialLoad) {
       updateCurrency();
     }
-  }, [currency]);
+  }, [currency, initialLoad]);
 
   const handleCurrencyChange = (newCurrency: string) => {
     setCurrency(newCurrency);
   };
 
   const handleLanguageChange = (newLanguage: string) => {
-    setLanguage(newLanguage);
-    saveSetting('language', newLanguage);
-    i18n.changeLanguage(newLanguage);
-    Alert.alert(t('settings.savedMessage'));
+    if (language !== newLanguage) {
+      setLanguage(newLanguage);
+      saveSetting('language', newLanguage);
+      i18n.changeLanguage(newLanguage);
+      if (!initialLoad) Alert.alert(t('settings.savedMessage')); // Show alert only if not initial load
+    }
   };
 
   const onRefresh = useCallback(() => {
