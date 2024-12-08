@@ -47,19 +47,14 @@ export default function SettingsScreen() {
     }
   };
 
-  useEffect(() => {
-    const updateCurrency = async () => {
-      await AsyncStorage.setItem('currency', currency);
-      if (!initialLoad) Alert.alert(t('settings.savedMessage')); // Show alert only if not initial load
-    };
-
-    if (!initialLoad) {
-      updateCurrency();
-    }
-  }, [currency, initialLoad]);
+  const updateCurrency = async (newCurrency: Currency) => {
+    await AsyncStorage.setItem('currency', newCurrency);
+    setCurrency(newCurrency);
+    if (!initialLoad) Alert.alert(t('settings.savedMessage')); // Show alert only if not initial load
+  };
 
   const handleCurrencyChange = (newCurrency: string) => {
-    setCurrency(newCurrency);
+    updateCurrency(newCurrency);
   };
 
   const handleLanguageChange = (newLanguage: string) => {
@@ -73,11 +68,13 @@ export default function SettingsScreen() {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    setTimeout(() => {
+    setTimeout(async () => {
+      const savedCurrency = (await AsyncStorage.getItem('currency')) || 'USD';
+      setCurrency(savedCurrency);
       setRefreshing(false);
       Alert.alert(t('settings.refreshedMessage'));
     }, 1000);
-  }, []);
+  }, [t]);
 
   return (
     <SafeAreaView className="bg-budget-charcoal flex-1">
@@ -92,10 +89,7 @@ export default function SettingsScreen() {
 
           {/* Theme Selector */}
           <View className="mb-4 flex flex-col gap-4">
-            <Text
-              className="text-lg font-bold text-center ml-2"
-              style={styles.label}
-            >
+            <Text className="text-lg font-bold text-center ml-2" style={styles.label}>
               {t('settings.theme')}
             </Text>
             <View className="flex flex-row justify-evenly">
@@ -118,12 +112,10 @@ export default function SettingsScreen() {
 
           {/* Currency Selector */}
           <View className="mb-4 flex flex-col gap-4">
-            <Text className="text-lg font-bold text-center ml-2" style={styles.label}>{t('settings.currency')}</Text>
-            <Picker
-              selectedValue={currency}
-              onValueChange={handleCurrencyChange}
-              style={styles.picker}
-            >
+            <Text className="text-lg font-bold text-center ml-2" style={styles.label}>
+              {t('settings.currency')}
+            </Text>
+            <Picker selectedValue={currency} onValueChange={handleCurrencyChange} style={styles.picker}>
               {supportCurrencies.map((cur) => (
                 <Picker.Item key={cur} label={cur} value={cur} />
               ))}
@@ -132,12 +124,10 @@ export default function SettingsScreen() {
 
           {/* Language Selector */}
           <View className="mb-4 flex flex-col gap-4">
-            <Text className="text-lg font-bold text-center ml-2" style={styles.label}>{t('settings.language')}</Text>
-            <Picker
-              selectedValue={language}
-              onValueChange={handleLanguageChange}
-              style={styles.picker}
-            >
+            <Text className="text-lg font-bold text-center ml-2" style={styles.label}>
+              {t('settings.language')}
+            </Text>
+            <Picker selectedValue={language} onValueChange={handleLanguageChange} style={styles.picker}>
               {supportLanguages.map((lang) => (
                 <Picker.Item key={lang} label={t(`settings.languages.${lang}`)} value={lang} />
               ))}
