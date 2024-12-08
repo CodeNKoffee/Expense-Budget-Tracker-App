@@ -1,5 +1,6 @@
-// Home Screen
+import { faArrowDown, faArrowUp, faMoneyBillWave, faMoneyBill, faSortAlphaDown, faSortAlphaUp } from '@fortawesome/free-solid-svg-icons';
 
+// Home Screen
 // Data for LineChart
 export const lineChartConfig = {
   backgroundGradientFrom: '#101010',
@@ -50,6 +51,18 @@ export const chartConfig = {
     stroke: '#ffa726',
   },
 };
+
+// History Screen
+// List of sort options
+export const sortOptions = [
+  { label: 'Most Recent to Oldest', icon: faArrowDown },
+  { label: 'Oldest to Most Recent', icon: faArrowUp },
+  { label: 'Largest Transactions', icon: faMoneyBillWave },
+  { label: 'Lowest Transactions', icon: faMoneyBill },
+  { label: 'Alphabetically', icon: faSortAlphaDown },
+  { label: 'Reverse Alphabetically', icon: faSortAlphaUp },
+];
+
 
 // Settings Screen
 // List of supported currencies

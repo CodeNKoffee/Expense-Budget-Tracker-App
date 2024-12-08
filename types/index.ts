@@ -56,6 +56,10 @@ export type TransactionListProps = {
   listPaddingBottom?: number;
 };
 
+export interface SortPillProps { 
+  onSort: (sortIndex: number) => void; 
+}
+
 // Union type of all the elements in the supportCurrencies array
 export type Currency = typeof supportCurrencies[number]
 

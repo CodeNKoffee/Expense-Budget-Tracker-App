@@ -67,3 +67,38 @@ export const aggregateExpensesByMonth = (transactions: Transaction[], labels: st
 
   return expensesByMonth;
 };
+
+// Helper function to parse the date string into a Date object
+const parseDateString = (dateString: string): Date => {
+  return new Date(dateString.replace('•', ',').replace(/(\d{1,2}):(\d{2}) (AM|PM)/, '$1:$2:00 $3'));
+};
+
+export const sortTransactions = (transactions: Transaction[], sortIndex: number): Transaction[] => {
+  let sortedTransactions;
+
+  switch (sortIndex) {
+    case 0: // Most Recent to Oldest
+      sortedTransactions = transactions.sort((a, b) => parseDateString(b.date).getTime() - parseDateString(a.date).getTime());
+      break;
+    case 1: // Oldest to Most Recent
+      sortedTransactions = transactions.sort((a, b) => parseDateString(a.date).getTime() - parseDateString(b.date).getTime());
+      break;
+    case 2: // Largest Transactions
+      sortedTransactions = transactions.sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount));
+      break;
+    case 3: // Lowest Transactions
+      sortedTransactions = transactions.sort((a, b) => Math.abs(a.amount) - Math.abs(b.amount));
+      break;
+    case 4: // Alphabetically
+      sortedTransactions = transactions.sort((a, b) => a.merchant.localeCompare(b.merchant));
+      break;
+    case 5: // Reverse Alphabetically
+      sortedTransactions = transactions.sort((a, b) => a.merchant.localeCompare(b.merchant)).reverse();
+      break;
+    default:
+      sortedTransactions = transactions;
+      break;
+    }
+  return sortedTransactions.reverse();
+};
+
